@@ -106,5 +106,38 @@ namespace Phone_Store_Management.DAO
                 log.Show();
             }
         }
+
+
+        /// <summary>
+        /// Return user RoleId.
+        /// If not found, return -1
+        /// </summary>
+        /// <param name="UserName"></param>
+        /// <param name="Password"></param>
+        /// <returns>RoleId</returns>
+        public int GetUserRole(string UserName, string Password)
+        {
+            try
+            {
+                var db = new DBStoreManagementEntities();
+                foreach (var user in db.Users)
+                {
+
+                    if (UserName.Equals(user.UserName.Replace(" ", string.Empty))
+                        && Password.Equals(user.Password.Replace(" ", string.Empty)))
+                    {
+                        return user.Role.RoleId;
+                    }
+                }
+
+            }
+            catch (Exception e)
+            {
+                var log = new LogError(GetType().Name + " GetAll() is error" + "\n" + e.Message);
+                log.Show();
+            }
+
+            return -1;
+        }
     }
 }

@@ -1,4 +1,4 @@
-﻿<Window x:Class="Phone_Store_Management.Dashboard"
+﻿<Window x:Class="Phone_Store_Management.CashierDashboard"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
@@ -74,11 +74,7 @@
 
             <!--Grid contains all of usercontrols-->
             <Grid Name="GridMain"  Margin="70 0 0 0">
-                <usercontrol:UCSale/>
-                <!--<Grid.ColumnDefinitions>
-                <ColumnDefinition Width="493*"/>
-                <ColumnDefinition Width="12*"/>
-                </Grid.ColumnDefinitions>-->
+                              
             </Grid>
         </StackPanel>
         
@@ -139,6 +135,12 @@
                             <StackPanel Orientation="Horizontal">
                                 <materialDesign:PackIcon Kind="Timetable" Height="25" Width="25" Margin="10"/>
                                 <TextBlock Text="Shift Registration" VerticalAlignment="Center"  Margin="20 10"/>
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem x:Name="ItemLogOut"  Height="60">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Logout" Width="25" Height="25" VerticalAlignment="Center" Margin="10" />
+                                <TextBlock Text="Log Out" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                             </StackPanel>
                         </ListViewItem>
                     </ListView>

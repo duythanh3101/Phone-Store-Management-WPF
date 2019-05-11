@@ -6,10 +6,39 @@
              xmlns:local="clr-namespace:Phone_Store_Management.UserControls"
              mc:Ignorable="d" 
              d:DesignHeight="300" d:DesignWidth="300"
-             Background="LightGreen"
              >
-    <Grid>
-        <Label Content="hahahahahah"></Label>
-            
-    </Grid>
+    <StackPanel Orientation="Vertical">
+        <Label VerticalAlignment="Top" HorizontalAlignment="Center"  Content="User Information:" FontSize="24"  Height="36" Width="220" FontWeight="Bold" Foreground="#DD464646" />
+        <StackPanel Orientation="Horizontal">
+            <Label Content="Username" VerticalAlignment="Center"/>
+            <Border BorderBrush="Black" BorderThickness="1" Background="White" HorizontalAlignment="Left" >
+                <TextBox Name="txtName"  Height="30" Width="200" HorizontalAlignment="Left"  VerticalAlignment="Center" Margin="0 0 10 0"  FontSize="16"  CaretBrush="{x:Null}" BorderBrush="Black" Background="{x:Null}" />
+            </Border>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+            <Label Content="Password" VerticalAlignment="Center"/>
+            <Border BorderBrush="Black" BorderThickness="1" Background="White"  Margin="30 0 0 0">
+                <PasswordBox Name="txtPassword" Margin="0 0 10 0" Height="30" Width="200" HorizontalAlignment="Left"  VerticalAlignment="Center"  FontSize="16"  CaretBrush="{x:Null}" BorderBrush="Black" Background="{x:Null}" />
+            </Border>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+            <Label Content="Role" VerticalAlignment="Center"/>
+            <Border BorderBrush="Black" BorderThickness="1" Background="#FFADADAD" VerticalAlignment="Center" Margin="30 0 0 0">
+                <TextBlock Name="txtRole"  Height="30" Width="200" HorizontalAlignment="Left"  VerticalAlignment="Center"  FontSize="16"  Background="{x:Null}" />
+            </Border>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+            <Label Content="Full Name" VerticalAlignment="Center"/>
+            <Border BorderBrush="Black" BorderThickness="1" Background="White" VerticalAlignment="Center" Margin="30 0 0 0">
+                <TextBox Name="txtFullName"  Height="30" Width="200" HorizontalAlignment="Left"  VerticalAlignment="Center"  FontSize="16"  CaretBrush="{x:Null}" BorderBrush="Black" Background="{x:Null}" />
+            </Border>
+        </StackPanel>
+        <StackPanel Orientation="Horizontal" Margin="0 10 0 0">
+            <Label Content="Address" VerticalAlignment="Center"/>
+            <Border BorderBrush="Black" BorderThickness="1" Background="White" VerticalAlignment="Center" Margin="30 0 0 0">
+                <TextBox Name="txtAddress"  Height="30" Width="200" HorizontalAlignment="Left"  VerticalAlignment="Center"  FontSize="16"  CaretBrush="{x:Null}" BorderBrush="Black" Background="{x:Null}" />
+            </Border>
+        </StackPanel>
+        
+    </StackPanel>
 </UserControl>

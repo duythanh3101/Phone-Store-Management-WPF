@@ -18,11 +18,12 @@ namespace Phone_Store_Management
     /// <summary>
     /// Interaction logic for Dashboard.xaml
     /// </summary>
-    public partial class Dashboard : Window
+    public partial class CashierDashboard : Window
     {
-        public Dashboard()
+        public CashierDashboard()
         {
             InitializeComponent();
+            GridMain.Children.Add(new UCSale());
         }
 
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
@@ -58,6 +59,11 @@ namespace Phone_Store_Management
                 case "ItemPersonalInfo":
                     usc = new UCPersonalInfo();
                     GridMain.Children.Add(usc);
+                    break;
+                case "ItemLogOut":
+                    var loginWindow = new LoginWindow();
+                    loginWindow.Show();
+                    Close();
                     break;
                 default:
                     break;

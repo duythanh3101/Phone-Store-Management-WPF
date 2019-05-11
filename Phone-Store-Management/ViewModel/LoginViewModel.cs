@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Phone_Store_Management.DAO;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -34,21 +35,43 @@ namespace Phone_Store_Management.ViewModel
         {
             if (p == null)
                 return;
-
-           
-            if (UserName == "1" && Password == "1")
+            if (UserName != null && Password != null)
             {
-                IsLogin = true;
-                var db = new Dashboard();
-                db.Show();
-                p.Close();
+                var roleId = new UserDAO().GetUserRole(UserName, Password);
+
+                if (roleId != -1)
+                {
+                    Window db = null;
+                    switch (roleId)
+                    {
+
+                        //manager or admin
+                        case 1:
+                            db = new ManagerDashboard();
+                            break;
+                        case 2:
+                            db = new CashierDashboard();
+                            break;
+                        default:
+                            break;
+                    }
+                    IsLogin = true;
+                    db.Show();
+                    p.Close();
+                }
+                else
+                {
+                    IsLogin = false;
+                    MessageBox.Show("Sai tài khoản hoặc mật khẩu!");
+                }
             }
             else
             {
-               
-                   IsLogin = false;
-                   MessageBox.Show("Sai tài khoản hoặc mật khẩu!");
+                IsLogin = false;
+                MessageBox.Show("Sai tài khoản hoặc mật khẩu!");
             }
+
+
         }
     }
 }

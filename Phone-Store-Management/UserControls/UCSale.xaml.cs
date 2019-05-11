@@ -28,8 +28,9 @@ namespace Phone_Store_Management.UserControls
         public UCSale()
         {
             InitializeComponent();
+            var db = new DBStoreManagementEntities();
 
-            list = new ObservableCollection<Product>(DataProvider.Ins.DB.Products.ToList());
+            list = new ObservableCollection<Product>(db.Products.ToList());
             listitem.ItemsSource = list;
         }
     }
