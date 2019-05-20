@@ -75,45 +75,49 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="CashierDashboard.xaml.cs">
+      <DependentUpon>CashierDashboard.xaml</DependentUpon>
+    </Compile>
     <Compile Include="DAO\IDao.cs" />
     <Compile Include="DAO\ProductDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="DTO\Bill.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\BillDetail.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\DataProvider.cs" />
-    <Compile Include="DTO\Model1.Context.cs">
+    <Compile Include="DTO\PhoneStoreManagement.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.Context.tt</DependentUpon>
+      <DependentUpon>PhoneStoreManagement.Context.tt</DependentUpon>
     </Compile>
-    <Compile Include="DTO\Model1.cs">
+    <Compile Include="DTO\PhoneStoreManagement.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
     </Compile>
-    <Compile Include="DTO\Model1.Designer.cs">
+    <Compile Include="DTO\PhoneStoreManagement.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
-      <DependentUpon>Model1.edmx</DependentUpon>
+      <DependentUpon>PhoneStoreManagement.edmx</DependentUpon>
     </Compile>
     <Compile Include="DTO\Product.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="DTO\ProductInCart.cs" />
     <Compile Include="DTO\Role.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\sysdiagram.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\Type.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="DTO\User.cs">
-      <DependentUpon>Model1.tt</DependentUpon>
+      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="ManagerDashboard.xaml.cs">
       <DependentUpon>ManagerDashboard.xaml</DependentUpon>
@@ -131,9 +135,12 @@
     <Compile Include="ViewModel\BaseViewModel.cs" />
     <Compile Include="ViewModel\DashBoardViewModel.cs" />
     <Compile Include="ViewModel\LoginViewModel.cs" />
+    <Compile Include="Windows\BillDetailWindow.xaml.cs">
+      <DependentUpon>BillDetailWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="CashierDashboard.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="LoginWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -143,16 +150,13 @@
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
-    <Compile Include="CashierDashboard.xaml.cs">
-      <DependentUpon>CashierDashboard.xaml</DependentUpon>
-    </Compile>
     <Compile Include="LoginWindow.xaml.cs">
       <DependentUpon>LoginWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Page Include="ManagerDashboard.xaml">
-      <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
     <Page Include="ResourceXAML\MainResource.xaml">
       <SubType>Designer</SubType>
@@ -169,6 +173,10 @@
     <Page Include="UserControls\UCSale.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\BillDetailWindow.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
     </Page>
   </ItemGroup>
   <ItemGroup>
@@ -189,12 +197,12 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="DTO\Model1.edmx">
+    <EntityDeploy Include="DTO\PhoneStoreManagement.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>Model1.Designer.cs</LastGenOutput>
+      <LastGenOutput>PhoneStoreManagement.Designer.cs</LastGenOutput>
     </EntityDeploy>
-    <None Include="DTO\Model1.edmx.diagram">
-      <DependentUpon>Model1.edmx</DependentUpon>
+    <None Include="DTO\PhoneStoreManagement.edmx.diagram">
+      <DependentUpon>PhoneStoreManagement.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
@@ -219,20 +227,19 @@
     <Resource Include="Images\avatar.png" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="DTO\Model1.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <LastGenOutput>Model1.Context.cs</LastGenOutput>
-      <DependentUpon>Model1.edmx</DependentUpon>
-    </Content>
-    <Content Include="DTO\Model1.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>Model1.edmx</DependentUpon>
-      <LastGenOutput>Model1.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Content Include="DTO\PhoneStoreManagement.Context.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PhoneStoreManagement.edmx</DependentUpon>
+      <LastGenOutput>PhoneStoreManagement.Context.cs</LastGenOutput>
+    </Content>
+    <Content Include="DTO\PhoneStoreManagement.tt">
+      <Generator>TextTemplatingFileGenerator</Generator>
+      <DependentUpon>PhoneStoreManagement.edmx</DependentUpon>
+      <LastGenOutput>PhoneStoreManagement.cs</LastGenOutput>
+    </Content>
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

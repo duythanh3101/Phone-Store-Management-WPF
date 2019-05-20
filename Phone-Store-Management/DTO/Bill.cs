@@ -22,7 +22,7 @@ namespace Phone_Store_Management.DTO
     
         public int BillID { get; set; }
         public Nullable<System.DateTime> BillDate { get; set; }
-        public Nullable<int> CashierID { get; set; }
+        public int CashierID { get; set; }
         public Nullable<double> TotalPrice { get; set; }
     
         public virtual User User { get; set; }

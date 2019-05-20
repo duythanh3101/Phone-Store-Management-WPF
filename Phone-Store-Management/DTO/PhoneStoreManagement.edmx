@@ -11,7 +11,7 @@
           </Key>
           <Property Name="BillID" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="BillDate" Type="datetime" />
-          <Property Name="CashierID" Type="int" />
+          <Property Name="CashierID" Type="int" Nullable="false" />
           <Property Name="TotalPrice" Type="float" />
         </EntityType>
         <EntityType Name="BillDetail">
@@ -30,10 +30,10 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar(max)" />
           <Property Name="Brand" Type="nvarchar(max)" />
-          <Property Name="TypeId" Type="int" />
-          <Property Name="Price" Type="float" />
+          <Property Name="TypeId" Type="int" Nullable="false" />
+          <Property Name="Price" Type="float" Nullable="false" />
           <Property Name="Description" Type="nvarchar(max)" />
-          <Property Name="Quantity" Type="int" />
+          <Property Name="Quantity" Type="int" Nullable="false" />
           <Property Name="ImageURL" Type="nvarchar(max)" />
         </EntityType>
         <EntityType Name="Role">
@@ -65,7 +65,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
-          <Property Name="RoleId" Type="int" />
+          <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar(max)" />
           <Property Name="UserName" Type="nchar" MaxLength="50" />
           <Property Name="Password" Type="nchar" MaxLength="50" />
@@ -74,7 +74,7 @@
           <Property Name="Address" Type="nvarchar(max)" />
         </EntityType>
         <Association Name="FK__Bill__CashierID__1BFD2C07">
-          <End Role="Users" Type="Self.Users" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.Users" Multiplicity="1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -110,7 +110,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Product__ImageUR__182C9B23">
-          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Type">
@@ -122,7 +122,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Users__RoleId__1273C1CD">
-          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
           <End Role="Users" Type="Self.Users" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
@@ -173,7 +173,7 @@
           </Key>
           <Property Name="BillID" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="BillDate" Type="DateTime" Precision="3" />
-          <Property Name="CashierID" Type="Int32" />
+          <Property Name="CashierID" Type="Int32" Nullable="false" />
           <Property Name="TotalPrice" Type="Double" />
           <NavigationProperty Name="User" Relationship="Self.FK__Bill__CashierID__1BFD2C07" FromRole="Bill" ToRole="Users" />
           <NavigationProperty Name="BillDetails" Relationship="Self.FK__BillDetai__BillI__1ED998B2" FromRole="Bill" ToRole="BillDetail" />
@@ -196,10 +196,10 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="Brand" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="TypeId" Type="Int32" />
-          <Property Name="Price" Type="Double" />
+          <Property Name="TypeId" Type="Int32" Nullable="false" />
+          <Property Name="Price" Type="Double" Nullable="false" />
           <Property Name="Description" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="Quantity" Type="Int32" />
+          <Property Name="Quantity" Type="Int32" Nullable="false" />
           <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BillDetails" Relationship="Self.FK__BillDetai__Produ__1FCDBCEB" FromRole="Product" ToRole="BillDetail" />
           <NavigationProperty Name="Type" Relationship="Self.FK__Product__ImageUR__182C9B23" FromRole="Product" ToRole="Type" />
@@ -235,7 +235,7 @@
             <PropertyRef Name="Id" />
           </Key>
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="RoleId" Type="Int32" />
+          <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UserName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
           <Property Name="Password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
@@ -246,7 +246,7 @@
           <NavigationProperty Name="Role" Relationship="Self.FK__Users__RoleId__1273C1CD" FromRole="Users" ToRole="Role" />
         </EntityType>
         <Association Name="FK__Bill__CashierID__1BFD2C07">
-          <End Role="Users" Type="Self.User" Multiplicity="0..1" />
+          <End Role="Users" Type="Self.User" Multiplicity="1" />
           <End Role="Bill" Type="Self.Bill" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Users">
@@ -282,7 +282,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Product__ImageUR__182C9B23">
-          <End Role="Type" Type="Self.Type" Multiplicity="0..1" />
+          <End Role="Type" Type="Self.Type" Multiplicity="1" />
           <End Role="Product" Type="Self.Product" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Type">
@@ -294,7 +294,7 @@
           </ReferentialConstraint>
         </Association>
         <Association Name="FK__Users__RoleId__1273C1CD">
-          <End Role="Role" Type="Self.Role" Multiplicity="0..1" />
+          <End Role="Role" Type="Self.Role" Multiplicity="1" />
           <End Role="Users" Type="Self.User" Multiplicity="*" />
           <ReferentialConstraint>
             <Principal Role="Role">
