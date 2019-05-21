@@ -1,0 +1,8 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/Phone-Store-Management/bin/Debug
+/Phone-Store-Management/obj/Debug
+/.vs/Phone-Store-Management/v15
+/packages/EntityFramework.6.2.0/tools

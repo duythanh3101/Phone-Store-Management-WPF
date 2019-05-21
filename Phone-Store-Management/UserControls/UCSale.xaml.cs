@@ -63,7 +63,8 @@ namespace Phone_Store_Management.UserControls
                 decimal value = 0.00M;
                 value = Convert.ToDecimal(totalprice);
                 total.Text = value.ToString("C");
-
+                ProductDetail uc = new ProductDetail(pr);
+                uc.ShowDialog();
             }
             catch
             {
