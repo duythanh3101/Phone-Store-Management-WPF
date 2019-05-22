@@ -1,4 +1,4 @@
-﻿using Phone_Store_Management.DTO;
+﻿using Phone_Store_Management.Entities;
 using Phone_Store_Management.Utilities;
 using System;
 using System.Collections.Generic;
@@ -33,7 +33,7 @@ namespace Phone_Store_Management.DAO
             }
         }
 
-        public Product Get(long id)
+        public Product Get(int id)
         {
             try
             {
@@ -106,6 +106,11 @@ namespace Phone_Store_Management.DAO
                 var log = new LogError(GetType().Name + " Update() is error" + "\n" + e.Message);
                 log.Show();
             }
+        }
+
+        public bool IsOutOfItems(int ProductId)
+        {
+            return !(Get(ProductId).Quantity > 0);
         }
     }
 }

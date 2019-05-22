@@ -7,30 +7,26 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Phone_Store_Management.DTO
+namespace Phone_Store_Management.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class User
+    public partial class Bill
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public User()
+        public Bill()
         {
-            this.Bills = new HashSet<Bill>();
+            this.BillDetails = new HashSet<BillDetail>();
         }
     
-        public int Id { get; set; }
-        public int RoleId { get; set; }
-        public string DisplayName { get; set; }
-        public string UserName { get; set; }
-        public string Password { get; set; }
-        public string IdentityCard { get; set; }
-        public Nullable<System.DateTime> Birthdate { get; set; }
-        public string Address { get; set; }
+        public int BillID { get; set; }
+        public System.DateTime BillDate { get; set; }
+        public int CashierID { get; set; }
+        public double TotalPrice { get; set; }
     
+        public virtual User User { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Bill> Bills { get; set; }
-        public virtual Role Role { get; set; }
+        public virtual ICollection<BillDetail> BillDetails { get; set; }
     }
 }

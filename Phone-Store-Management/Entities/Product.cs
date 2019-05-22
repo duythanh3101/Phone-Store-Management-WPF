@@ -7,7 +7,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Phone_Store_Management.DTO
+namespace Phone_Store_Management.Entities
 {
     using System;
     using System.Collections.Generic;

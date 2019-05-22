@@ -8,7 +8,7 @@ namespace Phone_Store_Management.DAO
 {
     public interface IDao<T>
     {
-        T Get(long id);
+        T Get(int id);
 
         List<T> GetAll();
 

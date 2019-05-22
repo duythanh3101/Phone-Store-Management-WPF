@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+ <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram DiagramId="78ed56233b3742e686b3f8effc773c6b" Name="Diagram1">
+        <EntityTypeShape EntityType="DBStoreManagementModel.Bill" Width="1.5" PointX="5.25" PointY="1.375" />
+        <EntityTypeShape EntityType="DBStoreManagementModel.BillDetail" Width="1.5" PointX="7.5" PointY="1.375" />
+        <EntityTypeShape EntityType="DBStoreManagementModel.Product" Width="1.5" PointX="5.25" PointY="5" />
+        <EntityTypeShape EntityType="DBStoreManagementModel.Role" Width="1.5" PointX="0.75" PointY="1.625" />
+        <EntityTypeShape EntityType="DBStoreManagementModel.Type" Width="1.5" PointX="3" PointY="5.625" />
+        <EntityTypeShape EntityType="DBStoreManagementModel.User" Width="1.5" PointX="3" PointY="1" />
+        <AssociationConnector Association="DBStoreManagementModel.FK__Bill__CashierID__1BFD2C07" />
+        <AssociationConnector Association="DBStoreManagementModel.FK__BillDetai__BillI__1ED998B2" />
+        <AssociationConnector Association="DBStoreManagementModel.FK__BillDetai__Produ__1FCDBCEB" />
+        <AssociationConnector Association="DBStoreManagementModel.FK__Product__ImageUR__182C9B23" />
+        <AssociationConnector Association="DBStoreManagementModel.FK__Users__RoleId__1273C1CD" />
+      </Diagram>
+    </edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

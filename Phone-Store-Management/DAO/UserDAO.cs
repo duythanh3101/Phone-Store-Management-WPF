@@ -1,4 +1,4 @@
-﻿using Phone_Store_Management.DTO;
+﻿using Phone_Store_Management.Entities;
 using Phone_Store_Management.Utilities;
 using System;
 using System.Collections.Generic;
@@ -49,7 +49,7 @@ namespace Phone_Store_Management.DAO
             }
         }
 
-        public User Get(long id)
+        public User Get(int id)
         {
             try
             {

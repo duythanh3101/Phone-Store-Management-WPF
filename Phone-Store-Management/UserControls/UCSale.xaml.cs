@@ -1,5 +1,6 @@
 ﻿using Phone_Store_Management.DAO;
-using Phone_Store_Management.DTO;
+using Phone_Store_Management.Entities;
+using Phone_Store_Management.Utilities;
 using Phone_Store_Management.Windows;
 using System;
 using System.Collections.Generic;
@@ -25,17 +26,19 @@ namespace Phone_Store_Management.UserControls
     public partial class UCSale : UserControl
     {
         private ObservableCollection<Product> listProducts;
-        private ObservableCollection<ProductInCart> Cart;
+        private Basket basket;
+        private ProductDAO productDAO;
 
         public UCSale()
         {
             InitializeComponent();
             var db = new DBStoreManagementEntities();
+            productDAO = new ProductDAO();
+            basket = new Basket();
 
-            Cart = new ObservableCollection<ProductInCart>();
             listProducts = new ObservableCollection<Product>(db.Products.ToList());
             listitem.ItemsSource = listProducts;
-            listProductsInCart.ItemsSource = Cart;
+            listProductsInCart.ItemsSource = basket.Details;
         }
 
         private void AddProductInCart_Click(object sender, MouseButtonEventArgs e)
@@ -43,28 +46,19 @@ namespace Phone_Store_Management.UserControls
             try
             {
                 Product pr = (Product)listitem.SelectedItems[0];
-                //Check if product is exist in the cart
-                int position = GetPositionOfProductInCartByID(pr.Id);
-                if (position != -1)
+                if (!productDAO.IsOutOfItems(pr.Id))
                 {
-                    //Increase amount of products
-                    Cart[position].Count++;
-                }
-                else // if not exist, add product into a cart
-                {
-                    Cart.Add(new ProductInCart(pr.Id, pr.DisplayName, pr.Brand, pr.TypeId, pr.Price, pr.Description, pr.Quantity,
-                        pr.ImageURL, 1));
+                    basket.AddDetail(pr.Id, pr.Price, pr.DisplayName, pr.Quantity);
                 }
 
                 listProductsInCart.Items.Refresh();
                 listitem.SelectedItems.Clear();
 
-                double totalprice = Cart.Sum(p => p.GetTotalPrice());
-                decimal value = 0.00M;
-                value = Convert.ToDecimal(totalprice);
-                total.Text = value.ToString("C");
-                ProductDetail uc = new ProductDetail(pr);
-                uc.ShowDialog();
+                double totalprice = basket.TotalPrice();
+                total.Text = MoneyConverter.ToDecimal(totalprice);
+
+                ProductDetail detail = new ProductDetail(pr);
+                detail.ShowDialog();
             }
             catch
             {
@@ -72,38 +66,17 @@ namespace Phone_Store_Management.UserControls
             }
         }
 
-        /// <summary>
-        /// Get position of product in cart by id
-        /// if exist, return this postion
-        /// else return -1
-        /// </summary>
-        /// <param name="id"></param>
-        /// <returns></returns>
-        private int GetPositionOfProductInCartByID(int id)
-        {
-            int len = Cart.Count;
-            for (int i = 0; i < len; i++)
-            {
-                if (id == Cart[i].Id)
-                {
-                    return i;
-                }
-            }
-            return -1;
-        }
-
         private void PayButton_Click(object sender, RoutedEventArgs e)
         {
-            var billWindow = new BillDetailWindow(Cart);
-            billWindow.ShowDialog();
+            var basketWindow = new BillDetailWindow(basket);
+            basketWindow.ShowDialog();
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)
         {
             Button btn = sender as Button;
-            ProductInCart pr = btn.DataContext as ProductInCart; //Get product in cart
-            int pos = GetPositionOfProductInCartByID(pr.Id); // Get posiotion of product in cart listview
-            Cart.RemoveAt(pos);
+            BasketDetails pr = btn.DataContext as BasketDetails; //Get product in basket
+            basket.Details.Remove(pr);
         }
 
         private void ClearButton_Click(object sender, RoutedEventArgs e)
@@ -112,7 +85,7 @@ namespace Phone_Store_Management.UserControls
             switch (result)
             {
                 case MessageBoxResult.Yes:
-                    Cart.Clear();
+                    basket.Details.Clear();
                     break;
                 case MessageBoxResult.No:
                     break;

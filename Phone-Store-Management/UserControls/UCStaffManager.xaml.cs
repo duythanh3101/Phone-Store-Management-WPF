@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Phone_Store_Management.Entities;
+using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
 using System.Linq;

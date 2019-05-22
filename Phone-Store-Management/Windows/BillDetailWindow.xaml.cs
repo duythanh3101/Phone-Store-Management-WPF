@@ -1,4 +1,5 @@
-﻿using Phone_Store_Management.DTO;
+﻿using Phone_Store_Management.Entities;
+using Phone_Store_Management.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -22,17 +23,18 @@ namespace Phone_Store_Management.Windows
     /// </summary>
     public partial class BillDetailWindow : Window
     {
-        private ObservableCollection<ProductInCart> listItems;
+        private Basket basket;
+
         public BillDetailWindow()
         {
             InitializeComponent();
         }
 
-        public BillDetailWindow(ObservableCollection<ProductInCart> list)
+        public BillDetailWindow(Basket basket)
         {
             InitializeComponent();
-            listBillProducts.ItemsSource = list;
-            listItems = list;
+            listBillProducts.ItemsSource = basket.Details;
+            this.basket = basket;
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
@@ -47,7 +49,7 @@ namespace Phone_Store_Management.Windows
 
         private void Window_Loaded(object sender, RoutedEventArgs e)
         {
-            Total.Text = listItems[0].TotalPrice.ToString();
+            Total.Text = MoneyConverter.ToDecimal(basket.Details.Sum(d => d.TotalPrice));
         }
 
         private void Receive_TextChanged(object sender, TextChangedEventArgs e)

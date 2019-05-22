@@ -7,23 +7,23 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Phone_Store_Management.DTO
+namespace Phone_Store_Management.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class Type
+    public partial class Role
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Type()
+        public Role()
         {
-            this.Products = new HashSet<Product>();
+            this.Users = new HashSet<User>();
         }
     
-        public int TypeId { get; set; }
+        public int RoleId { get; set; }
         public string DisplayName { get; set; }
     
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<Product> Products { get; set; }
+        public virtual ICollection<User> Users { get; set; }
     }
 }

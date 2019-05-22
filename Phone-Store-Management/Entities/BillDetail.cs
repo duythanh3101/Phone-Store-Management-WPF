@@ -7,17 +7,19 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace Phone_Store_Management.DTO
+namespace Phone_Store_Management.Entities
 {
     using System;
     using System.Collections.Generic;
     
-    public partial class sysdiagram
+    public partial class BillDetail
     {
-        public string name { get; set; }
-        public int principal_id { get; set; }
-        public int diagram_id { get; set; }
-        public Nullable<int> version { get; set; }
-        public byte[] definition { get; set; }
+        public int BillID { get; set; }
+        public int ProductId { get; set; }
+        public int Amount { get; set; }
+        public double Total { get; set; }
+    
+        public virtual Bill Bill { get; set; }
+        public virtual Product Product { get; set; }
     }
 }
