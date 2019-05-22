@@ -11,9 +11,14 @@
         <Image x:Name="imgProduct" DockPanel.Dock="Left" Source="{Binding ImageURL}" Width="auto" Height="auto"/>
         <StackPanel DockPanel.Dock="Right">
             <TextBlock x:Name="txtDisplayName" Text="{Binding DisplayName}"/>
+            <Separator/>
             <TextBlock x:Name="txtBrand" Text="{Binding Brand}"/>
+            <Separator/>
             <TextBlock x:Name="txtPrice" Text="{Binding Price, StringFormat={}{0:C}}"/>
-            <TextBlock x:Name="txtDesc" Text="{Binding Description}"/>
+            <Separator/>
+            <TextBlock Text="Description:"/>
+            <TextBlock x:Name="txtDesc" Text="{Binding Description}" TextWrapping="WrapWithOverflow"/>
+            <Separator/>
             <TextBlock x:Name="txtQuantity" Text="{Binding Quantity}"/>
         </StackPanel>
     </DockPanel>

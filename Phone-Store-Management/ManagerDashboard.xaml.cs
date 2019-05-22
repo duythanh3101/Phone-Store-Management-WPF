@@ -60,6 +60,10 @@ namespace Phone_Store_Management
                     usc = new UCPersonalInfo();
                     GridMain.Children.Add(usc);
                     break;
+                case "ItemStaffManager":
+                    usc = new UCStaffManager();
+                    GridMain.Children.Add(usc);
+                    break;
                 case "ItemLogOut":
                     var loginWindow = new LoginWindow();
                     loginWindow.Show();
@@ -75,6 +79,7 @@ namespace Phone_Store_Management
             TrainsitionigContentSlide.OnApplyTemplate();
             GridCursor.Margin = new Thickness(0, (10 + (60 * index)), 0, 0);
         }
+
     }
 }
 

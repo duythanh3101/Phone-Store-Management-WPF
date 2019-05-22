@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -28,11 +29,12 @@ namespace Phone_Store_Management
         {
             InitializeComponent();
             imgProduct.Source = new BitmapImage(new Uri(product.ImageURL));
-            txtDisplayName.Text = product.DisplayName;
-            txtBrand.Text = product.Brand;
-            txtPrice.Text = product.Price.ToString();
+            txtDisplayName.Text = "Product name: " + product.DisplayName;
+            txtBrand.Text = "Brand: " + product.Brand;
+            txtPrice.Text = String.Format("Price" + "#,###" + " VND", product.Price.ToString());
+            txtPrice.Text = "Price: " + product.Price.ToString("#,###" + " VND", CultureInfo.GetCultureInfo("vi-VN").NumberFormat);
             txtDesc.Text = product.Description;
-            txtQuantity.Text = product.Quantity.ToString();
+            txtQuantity.Text = "Quantity available: " + product.Quantity.ToString();
         }
 
         private void Window_MouseDoubleClick(object sender, MouseButtonEventArgs e)
