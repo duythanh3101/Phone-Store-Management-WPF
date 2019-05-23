@@ -9,12 +9,16 @@ namespace Phone_Store_Management.DAO
 {
     public class BillDAO : IDao<Bill>
     {
-        public void Add(Bill t)
+        public void Add(Bill obj)
         {
-            throw new NotImplementedException();
+            using (var db = new DBStoreManagementEntities())
+            {
+                db.Bills.Add(obj);
+                db.SaveChanges();
+            }
         }
 
-        public void Delete(Bill t)
+        public void Delete(Bill obj)
         {
             throw new NotImplementedException();
         }
@@ -29,7 +33,7 @@ namespace Phone_Store_Management.DAO
             throw new NotImplementedException();
         }
 
-        public void Update(Bill t)
+        public void Update(Bill obj)
         {
             throw new NotImplementedException();
         }

@@ -22,7 +22,7 @@
           <Property Name="BillID" Type="int" Nullable="false" />
           <Property Name="ProductId" Type="int" Nullable="false" />
           <Property Name="Amount" Type="int" Nullable="false" />
-          <Property Name="Total" Type="float" Nullable="false" />
+          <Property Name="UnitPrice" Type="float" Nullable="false" />
         </EntityType>
         <EntityType Name="Product">
           <Key>
@@ -203,7 +203,7 @@
           <Property Name="BillID" Type="Int32" Nullable="false" />
           <Property Name="ProductId" Type="Int32" Nullable="false" />
           <Property Name="Amount" Type="Int32" Nullable="false" />
-          <Property Name="Total" Type="Double" Nullable="false" />
+          <Property Name="UnitPrice" Type="Double" Nullable="false" />
           <NavigationProperty Name="Bill" Relationship="DBStoreManagementModel.FK__BillDetai__BillI__1ED998B2" FromRole="BillDetail" ToRole="Bill" />
           <NavigationProperty Name="Product" Relationship="DBStoreManagementModel.FK__BillDetai__Produ__1FCDBCEB" FromRole="BillDetail" ToRole="Product" />
         </EntityType>
@@ -313,7 +313,7 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
-      </Schema>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -332,7 +332,7 @@
           <EntitySetMapping Name="BillDetails">
             <EntityTypeMapping TypeName="DBStoreManagementModel.BillDetail">
               <MappingFragment StoreEntitySet="BillDetail">
-                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="UnitPrice" ColumnName="UnitPrice" />
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="BillID" ColumnName="BillID" />

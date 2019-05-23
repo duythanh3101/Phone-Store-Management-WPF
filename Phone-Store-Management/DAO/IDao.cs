@@ -12,10 +12,10 @@ namespace Phone_Store_Management.DAO
 
         List<T> GetAll();
 
-        void Add(T t);
+        void Add(T obj);
 
-        void Update(T t);
+        void Update(T obj);
 
-        void Delete(T t);
+        void Delete(T obj);
     }
 }

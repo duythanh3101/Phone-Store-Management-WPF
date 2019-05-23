@@ -139,5 +139,22 @@ namespace Phone_Store_Management.DAO
 
             return -1;
         }
+
+        /// <summary>
+        /// Return userID by Username.
+        /// If not found, return -1
+        /// </summary>
+        /// <param name="username"></param>
+        /// <returns></returns>
+        public int GetUserID(string username)
+        {
+            using (DBStoreManagementEntities db = new DBStoreManagementEntities())
+            {
+                var user = db.Users.SingleOrDefault(d => d.UserName.Replace(" ", string.Empty) == username);
+                if (user != null)
+                    return user.Id;
+            }
+            return -1;
+        }
     }
 }

@@ -54,11 +54,12 @@ namespace Phone_Store_Management.UserControls
                 listProductsInCart.Items.Refresh();
                 listitem.SelectedItems.Clear();
 
+                //Display total price in bill
                 double totalprice = basket.TotalPrice();
                 total.Text = MoneyConverter.ToDecimal(totalprice);
 
-                ProductDetail detail = new ProductDetail(pr);
-                detail.ShowDialog();
+                //ProductDetail detail = new ProductDetail(pr);
+                //detail.ShowDialog();
             }
             catch
             {

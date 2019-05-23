@@ -14,5 +14,11 @@ namespace Phone_Store_Management.Utilities
             value = Convert.ToDecimal(price);
             return value.ToString("C");
         }
+
+        public static string ToMoney(long value)
+        {
+            var info = System.Globalization.CultureInfo.GetCultureInfo("vi-VN");
+            return String.Format(info, "{0:c}", value);
+        }
     }
 }

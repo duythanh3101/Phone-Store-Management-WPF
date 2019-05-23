@@ -12,6 +12,7 @@ namespace Phone_Store_Management.ViewModel
 {
     public class LoginViewModel: BaseViewModel
     {
+        public static int UserID;
         public bool IsLogin { get; set; }
 
         private string _UserName;
@@ -44,7 +45,6 @@ namespace Phone_Store_Management.ViewModel
                     Window db = null;
                     switch (roleId)
                     {
-
                         //manager or admin
                         case 1:
                             db = new ManagerDashboard();
@@ -56,6 +56,8 @@ namespace Phone_Store_Management.ViewModel
                             break;
                     }
                     IsLogin = true;
+                    //Store user id
+                    UserID = new UserDAO().GetUserID(UserName);
                     db.Show();
                     p.Close();
                 }
