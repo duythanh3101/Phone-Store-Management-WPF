@@ -42,7 +42,7 @@ namespace Phone_Store_Management
         {
             UserControl usc = null;
             GridMain.Children.Clear();
-
+           
             int index = ListViewMenu.SelectedIndex;
             MoveCursorMenu(index);
 

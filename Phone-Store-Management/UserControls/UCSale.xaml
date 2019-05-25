@@ -27,7 +27,7 @@
                   materialDesign:HintAssist.HintOpacity=".26"
                   Width="2700" Background="{x:Null}" />
                 <ListView x:Name="listitem" Grid.Row="1" HorizontalAlignment="Stretch" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="False" 
-                          PreviewMouseLeftButtonUp="AddProductInCart_Click">
+                          PreviewMouseLeftButtonUp="AddProductInCart_Click" ItemsSource="{Binding}">
                     <ListView.ItemsPanel>
                         <ItemsPanelTemplate>
                             <UniformGrid Columns="3" />

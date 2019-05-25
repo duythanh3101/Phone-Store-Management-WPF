@@ -20,10 +20,13 @@ namespace Phone_Store_Management
     /// </summary>
     public partial class CashierDashboard : Window
     {
+        public static bool isStart = false;
+       
         public CashierDashboard()
         {
             InitializeComponent();
             GridMain.Children.Add(new UCSale());
+            isStart = true;
         }
 
         private void ButtonOpenMenu_Click(object sender, RoutedEventArgs e)
@@ -61,6 +64,7 @@ namespace Phone_Store_Management
                     GridMain.Children.Add(usc);
                     break;
                 case "ItemLogOut":
+                    isStart = false;
                     var loginWindow = new LoginWindow();
                     loginWindow.Show();
                     Close();

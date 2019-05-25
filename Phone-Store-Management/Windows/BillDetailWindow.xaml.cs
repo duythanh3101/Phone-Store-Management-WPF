@@ -26,6 +26,8 @@ namespace Phone_Store_Management.Windows
     public partial class BillDetailWindow : Window
     {
         private Basket basket;
+        private BillDAO billDAO;
+        public static bool IsSuccessPayment = false;
 
         public BillDetailWindow()
         {
@@ -37,6 +39,8 @@ namespace Phone_Store_Management.Windows
             InitializeComponent();
             listBillProducts.ItemsSource = basket.Details;
             this.basket = basket;
+
+            billDAO = new BillDAO();
         }
 
         private void ConfirmButton_Click(object sender, RoutedEventArgs e)
@@ -46,6 +50,7 @@ namespace Phone_Store_Management.Windows
             {
                 case MessageBoxResult.Yes:
                     Pay();
+                    IsSuccessPayment = true;
                     break;
                 case MessageBoxResult.No:
                     break;
@@ -73,19 +78,14 @@ namespace Phone_Store_Management.Windows
                     UnitPrice = item.UnitPrice,
                 };
                 bill.BillDetails.Add(detail);
-
-                //Update quantity of product in database
-                Product pro = new ProductDAO().Get(item.ProductId);
-                pro.Quantity -= item.Quantity;
             }
 
-            new BillDAO().Add(bill);
+            billDAO.Add(bill);
             MessageBox.Show("Thanh toán thành công",
                                    "Result",
                                    MessageBoxButton.OK,
                                    MessageBoxImage.Information);
             Close();
-            basket.Details.Clear();
         }
 
         private void CancelButton_Click(object sender, RoutedEventArgs e)

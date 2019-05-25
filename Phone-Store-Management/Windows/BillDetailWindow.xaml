@@ -46,7 +46,7 @@
                 <TextBlock Name="Exchange" Grid.Column="1" Grid.Row="3" FontSize="20" TextAlignment="Right"/>
             </Grid>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
-                <Button Name="ConfirmButton" Click="ConfirmButton_Click" Content="Confirm" Margin="10,10,10,10" Width="200"></Button>
+                <Button Name="ConfirmButton" Click="ConfirmButton_Click" Content="Confirm" Margin="10,10,10,10" Width="200" Visibility="Collapsed"></Button>
                 <Button Name="CancelButton" Click="CancelButton_Click" Content="Cancel" Margin="10,10,10,10" Width="200"></Button>
             </StackPanel>
 

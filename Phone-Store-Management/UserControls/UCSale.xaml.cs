@@ -32,13 +32,24 @@ namespace Phone_Store_Management.UserControls
         public UCSale()
         {
             InitializeComponent();
-            var db = new DBStoreManagementEntities();
             productDAO = new ProductDAO();
             basket = new Basket();
 
-            listProducts = new ObservableCollection<Product>(db.Products.ToList());
+            listProducts = new ObservableCollection<Product>(productDAO.GetAll().ToList());
             listitem.ItemsSource = listProducts;
             listProductsInCart.ItemsSource = basket.Details;
+
+            basket.Details.CollectionChanged += Details_CollectionChanged;
+        }
+
+        private void Details_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
+        {
+            if (basket.Details.Count == 0)
+            {
+                //update listview display products
+                listProducts = new ObservableCollection<Product>(productDAO.GetAll().ToList());
+                listitem.ItemsSource = listProducts;
+            }
         }
 
         private void AddProductInCart_Click(object sender, MouseButtonEventArgs e)
@@ -71,6 +82,31 @@ namespace Phone_Store_Management.UserControls
         {
             var basketWindow = new BillDetailWindow(basket);
             basketWindow.ShowDialog();
+
+            if (BillDetailWindow.IsSuccessPayment)
+            {
+                //Update database
+                UpdateProductsInDatabase();
+
+                //Update basket
+                basket.Details.Clear();
+                BillDetailWindow.IsSuccessPayment = false;
+
+                //Update total price
+                double totalprice = basket.TotalPrice();
+                total.Text = MoneyConverter.ToDecimal(totalprice);
+            }
+        }
+
+        private void UpdateProductsInDatabase()
+        {
+            foreach (var item in basket.Details)
+            {
+                int id = item.ProductId;
+                Product pr = productDAO.Get(id);
+                pr.Quantity = pr.Quantity - item.Quantity;
+                productDAO.Update(pr);
+            }
         }
 
         private void Delete_Click(object sender, RoutedEventArgs e)

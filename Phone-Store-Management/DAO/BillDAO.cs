@@ -1,4 +1,5 @@
 ﻿using Phone_Store_Management.Entities;
+using Phone_Store_Management.Utilities;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -30,7 +31,19 @@ namespace Phone_Store_Management.DAO
 
         public List<Bill> GetAll()
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var db = new DBStoreManagementEntities())
+                {
+                    return db.Bills.ToList();
+                }
+            }
+            catch (Exception e)
+            {
+                var log = new LogError(GetType().Name + " GetAll() is error" + "\n" + e.Message);
+                log.Show();
+            }
+            return null;
         }
 
         public void Update(Bill obj)
