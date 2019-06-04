@@ -75,10 +75,13 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </ApplicationDefinition>
+    <Compile Include="BUS\BillBUS.cs" />
+    <Compile Include="BUS\BillDetailBUS.cs" />
     <Compile Include="CashierDashboard.xaml.cs">
       <DependentUpon>CashierDashboard.xaml</DependentUpon>
     </Compile>
     <Compile Include="DAO\BillDAO.cs" />
+    <Compile Include="DAO\BillDetailDAO.cs" />
     <Compile Include="DAO\IDao.cs" />
     <Compile Include="DAO\ProductDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
@@ -144,6 +147,9 @@
     <Compile Include="Windows\BillDetailWindow.xaml.cs">
       <DependentUpon>BillDetailWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\ViewBillDetailWindow.xaml.cs">
+      <DependentUpon>ViewBillDetailWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="CashierDashboard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
@@ -192,6 +198,10 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+    <Page Include="Windows\ViewBillDetailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">
@@ -219,6 +229,7 @@
       <DependentUpon>PhoneStoreManagement.edmx</DependentUpon>
     </None>
     <None Include="packages.config" />
+    <None Include="PhoneStoreManangement.cd" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
@@ -255,5 +266,6 @@
       <LastGenOutput>PhoneStoreManagement.cs</LastGenOutput>
     </Content>
   </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

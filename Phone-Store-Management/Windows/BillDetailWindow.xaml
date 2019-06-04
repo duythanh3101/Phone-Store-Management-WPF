@@ -15,8 +15,9 @@
                 <ListView Name="listBillProducts" AlternationCount="10">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Number" Width="60" DisplayMemberBinding="{Binding (ItemsControl.AlternationIndex),
-       RelativeSource={RelativeSource AncestorType=ListViewItem}}" />
+                            <GridViewColumn Header="Number" Width="60"
+                                            DisplayMemberBinding="{Binding (ItemsControl.AlternationIndex),
+                                            RelativeSource={RelativeSource AncestorType=ListViewItem}}" />
                             <GridViewColumn Header="ID" Width="60" DisplayMemberBinding="{Binding ProductId}"/>
                             <GridViewColumn Header="Name" Width="250" DisplayMemberBinding="{Binding ProductName}"/>
                             <GridViewColumn Header="Count" Width="70" DisplayMemberBinding="{Binding Quantity}"/>

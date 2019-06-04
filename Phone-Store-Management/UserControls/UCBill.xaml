@@ -30,8 +30,8 @@
         </materialDesign:Card>
 
         <materialDesign:Card Grid.Row="1" Margin="5" VerticalAlignment="Stretch">
-            <ScrollViewer  CanContentScroll="true" VerticalScrollBarVisibility="Auto">
-                <ListView x:Name="ListBills"  >
+            <!--<ScrollViewer  CanContentScroll="true" VerticalScrollBarVisibility="Auto">-->
+                <ListView x:Name="ListBills" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" >
                     <ListView.View>
                         <GridView>
                             <GridViewColumn Header="Bill ID" DisplayMemberBinding="{Binding BillID}" Width="80"></GridViewColumn>
@@ -48,14 +48,14 @@
                             <GridViewColumn Width="150">
                                 <GridViewColumn.CellTemplate>
                                     <DataTemplate>
-                                        <Button Name="ViewButton" Margin="10,10,10,10" Content="View"  Background="#FF4F6BFF" BorderBrush="#FF4F6BFF" />
+                                        <Button Name="ViewButton" Margin="10,10,10,10" Content="View" Click="ViewButton_Click"  Background="#FF4F6BFF" BorderBrush="#FF4F6BFF" />
                                     </DataTemplate>
                                 </GridViewColumn.CellTemplate>
                             </GridViewColumn>
                         </GridView>
                     </ListView.View>
                 </ListView>
-            </ScrollViewer>
+            <!--</ScrollViewer>-->
         </materialDesign:Card>
 
     </Grid>

@@ -21,12 +21,52 @@ namespace Phone_Store_Management.DAO
 
         public void Delete(Bill obj)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var db = new DBStoreManagementEntities())
+                {
+                    //Delete all bill details
+                    List<BillDetail> details = (from rows in db.BillDetails where rows.BillID == obj.BillID select rows).ToList();
+                    foreach (var item in details)
+                    {
+                        db.BillDetails.Remove(item);    
+                    }
+
+                    //After that delete bill
+                    obj = (from rows in db.Bills where obj.BillID == rows.BillID select rows).SingleOrDefault();
+                    if (obj != null)
+                    {
+                        db.Bills.Remove(obj);
+                        db.SaveChanges();
+                    }
+                }
+            }
+            catch (Exception e)
+            {
+                var log = new LogError(GetType().Name + " Delete() is error" + "\n" + e.Message);
+                log.Show();
+            }
+            
         }
 
         public Bill Get(int id)
         {
-            throw new NotImplementedException();
+            try
+            {
+                using (var db = new DBStoreManagementEntities())
+                {
+                    Bill bill = db.Bills.Find(id);
+                    ICollection<BillDetail> lst = (from rows in db.BillDetails where rows.BillID == bill.BillID select rows).ToList();
+                    bill.BillDetails = lst;
+                    return bill;
+                }
+            }
+            catch (Exception e)
+            {
+                var log = new LogError(GetType().Name + " Get() is error" + "\n" + e.Message);
+                log.Show();
+            }
+            return null;
         }
 
         public List<Bill> GetAll()

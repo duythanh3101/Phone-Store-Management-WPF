@@ -37,9 +37,13 @@
 
 
     <Grid Background="#FFDEDEDE">
-        <StackPanel Orientation="Vertical">
+        <Grid >
+            <Grid.RowDefinitions>
+                <RowDefinition Height="60"></RowDefinition>
+                <RowDefinition Height="*"></RowDefinition>
+            </Grid.RowDefinitions>
             <!--Control Bar-->
-            <Grid Height="60" Background="#FF5C99D6" Margin="70 0 0 0">
+            <Grid Grid.Row="0" Background="#FF5C99D6" Margin="70 0 0 0">
                 <i:Interaction.Triggers>
                     <i:EventTrigger EventName="MouseLeftButtonDown">
                         <i:InvokeCommandAction Command="{Binding MouseMoveWindowCommand}" CommandParameter="{Binding ElementName=dashboardWindow}"/>
@@ -50,7 +54,6 @@
                     <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
                 </Grid.Effect>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="Duy Thanh" VerticalAlignment="Center" FontSize="16"/>
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                         <Button Command="{Binding MinimizeWindowCommand}" CommandParameter="{Binding ElementName=dashboardWindow}" HorizontalAlignment="Right" Margin="10 0"  Width="30" Height="30" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
                             <Button.Background>
@@ -73,10 +76,10 @@
             </Grid>
 
             <!--Grid contains all of usercontrols-->
-            <Grid Name="GridMain"  Margin="70 0 0 0">
+            <Grid Name="GridMain"  Margin="70 0 0 0" Grid.Row="1">
 
             </Grid>
-        </StackPanel>
+        </Grid>
 
 
         <!--Menu-->

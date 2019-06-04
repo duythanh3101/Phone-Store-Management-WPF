@@ -63,9 +63,9 @@ namespace Phone_Store_Management.Windows
         {
             Bill bill = new Bill()
             {
-                BillDate = DateTime.Today,
+                BillDate = DateTime.Now,
                 CashierID = LoginViewModel.UserID,
-                TotalPrice = basket.TotalPrice(),
+                TotalPrice = basket.TotalPrice()
             };
 
             foreach (var item in basket.Details)

@@ -1,6 +1,8 @@
-﻿using Phone_Store_Management.DAO;
+﻿using Phone_Store_Management.BUS;
+using Phone_Store_Management.DAO;
 using Phone_Store_Management.Entities;
 using Phone_Store_Management.ViewModel;
+using Phone_Store_Management.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
@@ -24,22 +26,16 @@ namespace Phone_Store_Management.UserControls
     /// </summary>
     public partial class UCBill : UserControl
     {
-        private ObservableCollection<Bill> listBills;
-        private BillDAO billDAO;
+        private List<Bill> listBills;
+        private BillBUS billBUS;
+        private BillDetailBUS billDetailBUS;
 
         public UCBill()
         {
             InitializeComponent();            
-            billDAO = new BillDAO();
-            listBills = new ObservableCollection<Bill>(billDAO.GetAll());
-           
-
-            if (CashierDashboard.isStart)
-            {
-                HideComponents();
-                listBills = new ObservableCollection<Bill>(billDAO.GetAll().Where(b => b.CashierID == LoginViewModel.UserID));
-            }
-            ListBills.ItemsSource = listBills;
+            billBUS = new BillBUS();
+            billDetailBUS = new BillDetailBUS();
+            LoadList();
         }
                 
         public void HideComponents()
@@ -52,31 +48,46 @@ namespace Phone_Store_Management.UserControls
 
         private void DeleteButton_Click(object sender, RoutedEventArgs e)
         {
+            try
+            {
+                MessageBoxResult result = MessageBox.Show("Do you want to delete it?", "Confirm", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                switch (result)
+                {
+                    case MessageBoxResult.Yes:
+                        Bill bill = (sender as Button).DataContext as Bill;
+                        billBUS.Delete(bill);
 
-        }
+                        MessageBox.Show("Delete Bill Success",
+                                              "Result",
+                                              MessageBoxButton.OK,
+                                              MessageBoxImage.Information);
+                        LoadList();
+                        break;
+                    case MessageBoxResult.No:
+                        break;
+                    default:
+                        break;
+                }
+            }
+            catch
+            {
 
-        private void Button_Click(object sender, RoutedEventArgs e)
-        {
-
+            }
         }
 
         private void Find_Click(object sender, RoutedEventArgs e)
         {
-            List<Bill> lst = listBills.ToList();
-            if (!startDate.Text.ToString().Equals(""))
+            if (startDate.Text.ToString().Equals("") || endDate.Text.ToString().Equals("") || CashierIDTextBox.Text.ToString().Equals(""))
             {
-                lst = lst.FindAll(b => b.BillDate >= DateTime.Parse(startDate.Text));       
-            }
-            if (!endDate.Text.ToString().Equals(""))
-            {
-                lst = lst.FindAll(b => b.BillDate <= DateTime.Parse(endDate.Text));
-            }
-            if (!CashierIDTextBox.ToString().Equals(""))
-            {
-                lst = lst.FindAll(b => b.CashierID == int.Parse(CashierIDTextBox.Text));
+                return;      
             }
 
-            if (lst.Count > 0)
+            DateTime start = DateTime.Parse(startDate.Text.ToString());
+            DateTime end = DateTime.Parse(endDate.Text.ToString());
+            int id = int.Parse(CashierIDTextBox.Text.ToString());
+
+            ObservableCollection<Bill> lst = billBUS.GetAll(start, end, id);
+            if (lst != null)
             {
                 ListBills.ItemsSource = lst;
                 ListBills.Items.Refresh();
@@ -88,6 +99,31 @@ namespace Phone_Store_Management.UserControls
                                 MessageBoxButton.OK,
                                 MessageBoxImage.Information);
             }
+        }
+
+        private void ViewButton_Click(object sender, RoutedEventArgs e)
+        {
+            //var lst = new List<BillDetail>();
+            Bill bill = (sender as Button).DataContext as Bill;
+            //bill = billBUS.Get(bill.BillID);
+            var lst = billDetailBUS.GetAllByID(bill.BillID);
+                if (lst != null)
+            {
+                var viewbilldetailWindow = new ViewBillDetailWindow(lst);
+                viewbilldetailWindow.ShowDialog();
+            }
+        }
+
+        private void LoadList()
+        {
+            listBills = billBUS.GetAll();
+
+            if (CashierDashboard.isStart)
+            {
+                HideComponents();
+                listBills = billBUS.GetAllByID(LoginViewModel.UserID);
+            }
+            ListBills.ItemsSource = listBills;
         }
     }
 }
