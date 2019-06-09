@@ -90,14 +90,13 @@ namespace Phone_Store_Management.DAO
             {
                 using (var db = new DBStoreManagementEntities())
                 {
-                    var product = db.Products.Find(t.Id);
-                    product.DisplayName = t.DisplayName;
-                    product.Brand = t.Brand;
-                    product.TypeId = t.TypeId;
-                    product.Price = t.Price;
-                    product.Description = t.Description;
-                    product.Quantity = t.Quantity;
-                    product.ImageURL = t.ImageURL;
+                    var entity = db.Products.Find(t.Id);
+                    if (entity == null)
+                    {
+                        return;
+                    }
+
+                    db.Entry(entity).CurrentValues.SetValues(t);
                     db.SaveChanges();
                 }
             }

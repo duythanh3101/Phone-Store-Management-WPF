@@ -17,6 +17,7 @@ namespace Phone_Store_Management.DAO
                 using (var db = new DBStoreManagementEntities())
                 {
                     db.Users.Add(t);
+                    db.SaveChanges();
                 }
             }
             catch (Exception e)
@@ -89,14 +90,13 @@ namespace Phone_Store_Management.DAO
             {
                 using (var db = new DBStoreManagementEntities())
                 {
-                    var user = db.Users.Find(t.Id);
-                    user.DisplayName = t.DisplayName;
-                    user.RoleId = t.RoleId;
-                    user.UserName = t.UserName;
-                    user.Password = t.Password;
-                    user.IdentityCard = t.IdentityCard;
-                    user.Birthdate = t.Birthdate;
-                    user.Address = t.Address;
+                    var entity = db.Users.Find(t.Id);
+                    if (entity == null)
+                    {
+                        return;
+                    }
+
+                    db.Entry(entity).CurrentValues.SetValues(t);
                     db.SaveChanges();
                 }
             }

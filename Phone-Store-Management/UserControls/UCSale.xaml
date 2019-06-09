@@ -35,8 +35,8 @@
                     </ListView.ItemsPanel>
                     <ListView.ItemTemplate>
                         <DataTemplate>
-                            <Canvas Margin="10" Width="100" Height="100">
-                                <Border Margin="10" Width="110" Height="160">
+                            <Canvas Margin="10" Width="100" Height="150">
+                                <Border >
                                     <Canvas>
                                         <Border Panel.ZIndex="2"  BorderBrush="Black" BorderThickness="0.5">
                                             <TextBlock Panel.ZIndex="2" Text="{Binding Quantity}" Background="#FF4D69FF" Foreground="#FFF9F8F8" FontFamily="Lato" FontSize="14" />
