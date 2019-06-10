@@ -25,5 +25,10 @@ namespace Phone_Store_Management
             InitializeComponent();
             txtUserName.Focus();
         }
+
+        private void LoginWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        {
+            this.DragMove();
+        }
     }
 }

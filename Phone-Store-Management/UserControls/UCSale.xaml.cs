@@ -50,6 +50,8 @@ namespace Phone_Store_Management.UserControls
                 listProducts = new ObservableCollection<Product>(productDAO.GetAll().ToList());
                 listitem.ItemsSource = listProducts;
             }
+            double totalprice = basket.TotalPrice();
+            total.Text = MoneyConverter.ToDecimal(totalprice);
         }
 
         private void AddProductInCart_Click(object sender, MouseButtonEventArgs e)
@@ -64,13 +66,6 @@ namespace Phone_Store_Management.UserControls
 
                 listProductsInCart.Items.Refresh();
                 listitem.SelectedItems.Clear();
-
-                //Display total price in bill
-                double totalprice = basket.TotalPrice();
-                total.Text = MoneyConverter.ToDecimal(totalprice);
-
-                //ProductDetail detail = new ProductDetail(pr);
-                //detail.ShowDialog();
             }
             catch
             {
@@ -91,10 +86,6 @@ namespace Phone_Store_Management.UserControls
                 //Update basket
                 basket.Details.Clear();
                 BillDetailWindow.IsSuccessPayment = false;
-
-                //Update total price
-                double totalprice = basket.TotalPrice();
-                total.Text = MoneyConverter.ToDecimal(totalprice);
             }
         }
 
@@ -127,6 +118,25 @@ namespace Phone_Store_Management.UserControls
                 case MessageBoxResult.No:
                     break;
             }
+        }
+
+        private void ViewProductDetail_Click(object sender, RoutedEventArgs e)
+        {
+            Product pr = (Product)listitem.SelectedItems[0];
+            ProductDetail uc = new ProductDetail(pr);
+            uc.ShowDialog();
+        }
+
+        private void AddToCart_Click(object sender, RoutedEventArgs e)
+        {
+            Product pr = (Product)listitem.SelectedItems[0];
+            if (!productDAO.IsOutOfItems(pr.Id))
+            {
+                basket.AddDetail(pr.Id, pr.Price, pr.DisplayName, pr.Quantity);
+            }
+
+            listProductsInCart.Items.Refresh();
+            listitem.SelectedItems.Clear();
         }
     }
 }

@@ -14,7 +14,7 @@
         WindowStyle="None" 
         FontFamily="Segoe UI Emoji"   
         DataContext="{StaticResource LoginVM}"
-        Name="loginWindow"
+        Name="loginWindow" MouseLeftButtonDown="LoginWindow_MouseLeftButtonDown"
         >
     <Grid>
         <Rectangle Height="280" VerticalAlignment="Top">
