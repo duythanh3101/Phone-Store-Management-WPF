@@ -13,24 +13,24 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace Phone_Store_Management
+namespace Phone_Store_Management.UserControls
 {
     /// <summary>
-    /// Interaction logic for LoginWindow.xaml
+    /// Interaction logic for UCProductManager.xaml
     /// </summary>
-    public partial class LoginWindow : Window
+    public partial class UCProductManager : UserControl
     {
-        public LoginWindow()
+        public UCProductManager()
         {
             InitializeComponent();
-            txtUserName.Focus();
-            txtUserName.Text = "admin";
-            PasswordBox.Password = "admin";
         }
 
-        private void LoginWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
+        private void ShowOrHideCRUDMenu_Click(object sender, RoutedEventArgs e)
         {
-            this.DragMove();
+            if (gridCRUD.Visibility == Visibility.Collapsed)
+                gridCRUD.Visibility = Visibility.Visible;
+            else
+                gridCRUD.Visibility = Visibility.Collapsed;
         }
     }
 }

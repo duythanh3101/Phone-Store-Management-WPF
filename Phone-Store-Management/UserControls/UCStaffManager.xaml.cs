@@ -49,7 +49,7 @@ namespace Phone_Store_Management.UserControls
                 txtDisplayName.Text = user.DisplayName.ToString();
                 txtRoleId.Text = user.RoleId.ToString();
                 txtIdentityCard.Text = user.IdentityCard.ToString();
-                txtAddress.Text = user.Address.ToString();
+                txtAddress.Text = user.Address;
                 dpkBirthdate.Text = user.Birthdate.ToString();
             }
             

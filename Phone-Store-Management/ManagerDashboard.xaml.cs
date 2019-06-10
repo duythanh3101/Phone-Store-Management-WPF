@@ -52,6 +52,10 @@ namespace Phone_Store_Management
                     usc = new UCSale();
                     GridMain.Children.Add(usc);
                     break;
+                case "ItemProductManager":
+                    usc = new UCProductManager();
+                    GridMain.Children.Add(usc);
+                    break;
                 case "ItemBill":
                     usc = new UCBill();
                     GridMain.Children.Add(usc);

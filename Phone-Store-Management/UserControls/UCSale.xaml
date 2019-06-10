@@ -8,6 +8,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="800"
              Name="ucSale"
+             xml:lang="vi-VN"
              >
     <Grid>
         <Grid x:Name="MainGrid">
@@ -125,7 +126,7 @@
                     </Grid>
                     <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
                         <Label Name="lblTotal" Content="TOTAL :" FontSize="24" FontWeight="Bold" Foreground="Red" />
-                        <TextBlock Name="total" Text="$0.00" VerticalAlignment="Center"  TextAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="Red" />
+                        <TextBlock Name="total" Text="0" VerticalAlignment="Center"  TextAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="Red" />
                     </StackPanel>
                     <StackPanel Orientation="Horizontal">
                         <Button Name="ClearButton" Click="ClearButton_Click" Content="Clear" Margin="10,10,10,10"  Width="220" Height="40" Background="#FFFF4545" FontSize="22" />

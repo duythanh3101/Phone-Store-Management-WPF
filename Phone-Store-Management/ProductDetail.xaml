@@ -6,8 +6,8 @@
         xmlns:local="clr-namespace:Phone_Store_Management"
         mc:Ignorable="d"
         Title="ProductDetail" Height="450" Width="800"
-        WindowStartupLocation="CenterScreen" WindowStyle="None" MouseDoubleClick="Window_MouseDoubleClick">
-    <DockPanel>
+        WindowStartupLocation="CenterScreen" WindowStyle="None" MouseDoubleClick="Window_MouseDoubleClick" FontSize="14">
+    <DockPanel Background="#FFDEDEDE">
         <Image x:Name="imgProduct" DockPanel.Dock="Left" Source="{Binding ImageURL}" Width="auto" Height="auto"/>
         <StackPanel DockPanel.Dock="Right">
             <TextBlock x:Name="txtDisplayName" Text="{Binding DisplayName}"/>

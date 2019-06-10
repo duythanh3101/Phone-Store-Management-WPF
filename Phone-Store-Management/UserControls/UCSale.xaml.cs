@@ -5,8 +5,10 @@ using Phone_Store_Management.Windows;
 using System;
 using System.Collections.Generic;
 using System.Collections.ObjectModel;
+using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
@@ -32,6 +34,10 @@ namespace Phone_Store_Management.UserControls
         public UCSale()
         {
             InitializeComponent();
+            CultureInfo ci = new CultureInfo("vi-VN");
+            Thread.CurrentThread.CurrentCulture = ci;
+            Thread.CurrentThread.CurrentUICulture = ci;
+            total.Text = MoneyConverter.ToDecimal(0);
             productDAO = new ProductDAO();
             basket = new Basket();
 
