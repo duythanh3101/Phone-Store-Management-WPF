@@ -51,7 +51,7 @@
                                             </Border.Background>
                                         </Border>
                                         <TextBlock Panel.ZIndex="2" Margin="5" Text="{Binding Price, StringFormat={}{0:C}}" FontSize="17" FontFamily="Franklin Gothic Medium" Canvas.Top="110"/>
-                                        <TextBlock Panel.ZIndex="2" Margin="5 0" Text="{Binding DisplayName}" FontSize="15" Canvas.Top="130"/>
+                                        <TextBlock Panel.ZIndex="2" Margin="5 0" Text="{Binding DisplayName}" FontSize="15" Canvas.Top="130" TextWrapping="Wrap"/>
                                     </Canvas>
                                 </Border>
                                 <Canvas.ContextMenu>

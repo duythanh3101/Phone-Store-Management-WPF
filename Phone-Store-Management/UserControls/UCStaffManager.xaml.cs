@@ -101,7 +101,7 @@ namespace Phone_Store_Management.UserControls
                     Birthdate = Convert.ToDateTime(dpkBirthdate.Text.ToString())
                 };
 
-                // if user is not exist
+                // if user doesn't exist
                 if (userDAO.GetUserID(user.UserName) != -1)
                 {
                     MessageBox.Show("User is exist, please change username");

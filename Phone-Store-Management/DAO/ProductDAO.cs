@@ -75,6 +75,7 @@ namespace Phone_Store_Management.DAO
                 using (var db = new DBStoreManagementEntities())
                 {
                     db.Products.Add(t);
+                    db.SaveChanges();
                 }
             }
             catch (Exception e)

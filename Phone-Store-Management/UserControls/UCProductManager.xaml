@@ -7,49 +7,75 @@
              xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
              mc:Ignorable="d" 
              d:DesignHeight="450" d:DesignWidth="800"
-             FontSize="14" Foreground="Black">
-    <StackPanel Margin="10 0 0 0">
-        <Button Content="Hide | Show CRUD Menu" Click="ShowOrHideCRUDMenu_Click"/>
-
-        <Grid Name="gridCRUD">
+             FontSize="14" Foreground="Black"
+             xml:lang="vi-VN">
+    <DockPanel Margin="5 5 5 5">
+        <Button DockPanel.Dock="Top" Content="Hide | Show CRUD Menu" Click="ShowOrHideCRUDMenu_Click"/>
+        <Grid DockPanel.Dock="Top" Name="gridCRUD">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
-                <ColumnDefinition Width="*" />
             </Grid.ColumnDefinitions>
-
-            <StackPanel Grid.Column="0">
-                <DockPanel>
-                    <Button Content="..." DockPanel.Dock="Right"></Button>
-                    <TextBox materialDesign:HintAssist.Hint="URL here" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-                </DockPanel>
+            <StackPanel Grid.Column="0" Margin="0 5 5 0">
+                <UniformGrid Columns="2">
+                    <Button Name="btnBrowseOffline" Content="Local image" Click="BtnBrowseOffline_Click"/>
+                    <Button Name="btnBrowseOnline" Content="Online image" Click="BtnBrowseOnline_Click"/>
+                </UniformGrid>
+                <TextBox Name="txtImageURL" materialDesign:HintAssist.Hint="URL here" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
                 <Image x:Name="imgProduct" Source="{Binding ImageURL}" Width="auto" Height="auto"/>
             </StackPanel>
-
-            
-
-            <StackPanel Grid.Column="1">
-
+            <StackPanel Grid.Column="1" Margin="0 5 5 0">
+                <TextBox x:Name="txtID" Text="{Binding Id}" materialDesign:HintAssist.Hint="ID" Style="{StaticResource MaterialDesignFloatingHintTextBox}" IsReadOnly="True"/>
                 <TextBox x:Name="txtDisplayName" Text="{Binding DisplayName}" materialDesign:HintAssist.Hint="Display name" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-
                 <TextBox x:Name="txtBrand" Text="{Binding Brand}" materialDesign:HintAssist.Hint="Brand" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-
                 <TextBox x:Name="txtPrice" Text="{Binding Price, StringFormat={}{0:C}}" materialDesign:HintAssist.Hint="Price" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
-
                 <TextBox x:Name="txtQuantity" Text="{Binding Quantity}" materialDesign:HintAssist.Hint="Quantity" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
+                <UniformGrid Columns="2">
+                    <Button Name="btnAdd" Content="Add" Click="BtnAdd_Click"/>
+                    <Button Name="btnSave" Content="Save" Click="BtnSave_Click" Visibility="Collapsed"/>
+                    <Button Content="Cancel" Click="BtnCancel_Click"/>
+                    <Button Name="btnDelete" Content="Delete" Click="BtnDelete_Click" Visibility="Collapsed"/>
+                </UniformGrid>
             </StackPanel>
-
-            <StackPanel Grid.Column="2" Grid.ColumnSpan="3">
+            <StackPanel Grid.Column="2" Grid.ColumnSpan="2" Margin="0 5 5 0">
                 <TextBox x:Name="txtDesc" Text="{Binding Description}" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Description" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
             </StackPanel>
-            
         </Grid>
+        <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Visible">
+            <ListView x:Name="listProducts" SelectionChanged="ListProducts_SelectionChanged">
+                <ListView.View>
+                    <GridView>
+                        <GridViewColumn Header="ID" Width="auto" DisplayMemberBinding="{Binding Id}"/>
+                        <GridViewColumn Header="Display name" Width="auto" DisplayMemberBinding="{Binding DisplayName}"/>
+                        <GridViewColumn Header="Image preview" Width="200">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding ImageURL}"/>
+                                        <Image Source="{Binding ImageURL}"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                        <GridViewColumn Header="Brand"  Width="auto"  DisplayMemberBinding="{Binding Brand}"/>
+                        <GridViewColumn Header="TypeID" Width="auto" DisplayMemberBinding="{Binding TypeId}"/>
+                        <GridViewColumn Header="Price"  Width="auto"  DisplayMemberBinding="{Binding Price, StringFormat={}{0:C}}"/>
+                        <GridViewColumn Header="Quantity"  Width="auto"  DisplayMemberBinding="{Binding Quantity}"/>
+                        <GridViewColumn Header="Description"  Width="auto">
+                            <GridViewColumn.CellTemplate>
+                                <DataTemplate>
+                                    <StackPanel>
+                                        <TextBlock Text="{Binding Description}" TextWrapping="Wrap"/>
+                                    </StackPanel>
+                                </DataTemplate>
+                            </GridViewColumn.CellTemplate>
+                        </GridViewColumn>
+                    </GridView>
+                </ListView.View>
+            </ListView>
+        </ScrollViewer>
 
-        
-        <ListView Grid.Row="1">
-            <Separator/>
-        </ListView>
-    </StackPanel>
+    </DockPanel>
 </UserControl>
