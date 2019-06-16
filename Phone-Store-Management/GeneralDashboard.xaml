@@ -1,28 +1,28 @@
-﻿<Window x:Class="Phone_Store_Management.CashierDashboard"
+﻿<Window x:Class="Phone_Store_Management.GeneralDashboard"
         xmlns:materialDesign="http://materialdesigninxaml.net/winfx/xaml/themes"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
-        xmlns:local="clr-namespace:Phone_Store_Management"
+        xmlns:local="clr-namespace:Phone_Store_Management.Windows"
         xmlns:usercontrol="clr-namespace:Phone_Store_Management.UserControls"
         xmlns:i="http://schemas.microsoft.com/expression/2010/interactivity"
-        mc:Ignorable="d" Height="600" Width="1080" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
-        Title="DashBoard"
-        Name="dashboardWindow"
-        DataContext="{StaticResource DashBoardVM}"
+        
+        mc:Ignorable="d"
+        Title="GeneralDashboard" Height="600" Width="1080" Foreground="White" ResizeMode="NoResize" WindowStartupLocation="CenterScreen" WindowStyle="None"
+        Name="dashboardWindow" DataContext="{StaticResource DashBoardVM}"
         >
     <Window.Resources>
         <Storyboard x:Key="OpenMenu">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
                 <EasingDoubleKeyFrame KeyTime="0" Value="70"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="200"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="230"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
         <Storyboard x:Key="CloseMenu">
             <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="(FrameworkElement.Width)" Storyboard.TargetName="GridMenu">
-                <EasingDoubleKeyFrame KeyTime="0" Value="200"/>
-                <EasingDoubleKeyFrame KeyTime="0:0:0.5" Value="70"/>
+                <EasingDoubleKeyFrame KeyTime="0" Value="230"/>
+                <EasingDoubleKeyFrame KeyTime="0:0:0.2" Value="70"/>
             </DoubleAnimationUsingKeyFrames>
         </Storyboard>
     </Window.Resources>
@@ -34,8 +34,9 @@
             <BeginStoryboard Storyboard="{StaticResource CloseMenu}"/>
         </EventTrigger>
     </Window.Triggers>
+
     <Grid Background="#FFDEDEDE">
-        <Grid>
+        <Grid >
             <Grid.RowDefinitions>
                 <RowDefinition Height="60"></RowDefinition>
                 <RowDefinition Height="*"></RowDefinition>
@@ -52,7 +53,7 @@
                     <DropShadowEffect BlurRadius="1" ShadowDepth="1" Color="#FFACACAC"/>
                 </Grid.Effect>
                 <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
-                    <TextBlock Text="Duy Thanh" VerticalAlignment="Center" FontSize="16"/>
+                    <TextBlock Name="txtWelcomeText" VerticalAlignment="Center" FontSize="16"/>
                     <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
                         <Button Command="{Binding MinimizeWindowCommand}" CommandParameter="{Binding ElementName=dashboardWindow}" HorizontalAlignment="Right" Margin="10 0"  Width="30" Height="30" BorderBrush="{x:Null}" Padding="0" Foreground="Gray">
                             <Button.Background>
@@ -71,16 +72,16 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Store Management</TextBlock>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Manager Dashboard</TextBlock>
             </Grid>
 
             <!--Grid contains all of usercontrols-->
             <Grid Name="GridMain"  Margin="70 0 0 0" Grid.Row="1">
-                              
+
             </Grid>
         </Grid>
-        
-        
+
+
         <!--Menu-->
         <Grid x:Name="GridMenu" Width="70" HorizontalAlignment="Left" Background="#FF31577E">
             <Grid.Effect>
@@ -105,7 +106,7 @@
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
                         <Image Height="50" Width="50" VerticalAlignment="Bottom" Source="Images/avatar.png" Stretch="Fill"/>
-                        <TextBlock Text="Admin" Height="20" VerticalAlignment="Center" Margin="20,10" Foreground="#000"/>
+                        <TextBlock Name="txtLoggedInUser" Text="Hello" Height="20" VerticalAlignment="Center" Margin="20,10" Foreground="#000"/>
                     </StackPanel>
                 </Grid>
 
@@ -115,28 +116,40 @@
                     </materialDesign:TransitioningContent>
                     <!--Menu List-->
                     <ListView x:Name="ListViewMenu" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged" Margin="0 10 0 0">
-                        <ListViewItem x:Name="ItemSale" Height="60">
-                            <StackPanel Orientation="Horizontal" >
-                                <materialDesign:PackIcon Kind="Shopify" Height="25" Width="25" Margin="10"/>
-                                <TextBlock Text="Home" VerticalAlignment="Center" Margin="20 10"/>
+                        <!--<ListViewItem x:Name="ItemSale" Height="60">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Shopify" Width="25" Height="25" VerticalAlignment="Center" Margin="10" />
+                                <TextBlock Text="Sale" FontSize="17" VerticalAlignment="Center" Margin="20 10" />
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem x:Name="ItemBill" Height="60">
+                        <ListViewItem x:Name="ItemProductManager"  Height="60">
                             <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Receipt" Height="25" Width="25" Margin="10"/>
-                                <TextBlock Text="Bill History" VerticalAlignment="Center" Margin="20 10"/>
+                                <materialDesign:PackIcon Kind="AddShoppingCart" Width="25" Height="25" VerticalAlignment="Center" Margin="10" />
+                                <TextBlock Text="Product Manager" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem x:Name="ItemPersonalInfo" Height="60">
+                        <ListViewItem x:Name="ItemStatistics"  Height="60">
                             <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="UserCardDetails" Height="25" Width="25" Margin="10"/>
-                                <TextBlock Text="Personal Info" VerticalAlignment="Center"  Margin="20 10"/>
+                                <materialDesign:PackIcon Kind="ChartBar" Width="25" Height="25" VerticalAlignment="Center" Margin="10" />
+                                <TextBlock Text="Statistics" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                             </StackPanel>
                         </ListViewItem>
-                        <ListViewItem x:Name="ItemShiftRegistration" Height="60">
+                        <ListViewItem x:Name="ItemStaffManager"  Height="60">
                             <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Timetable" Height="25" Width="25" Margin="10"/>
-                                <TextBlock Text="Shift Registration" VerticalAlignment="Center"  Margin="20 10"/>
+                                <materialDesign:PackIcon Kind="UserSupervisor" Width="25" Height="25" VerticalAlignment="Center" Margin="10" />
+                                <TextBlock Text="Staff Manager" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem x:Name="ItemBill"  Height="60">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Receipt" Width="25" Height="25" VerticalAlignment="Center" Margin="10" />
+                                <TextBlock Text="Bill History" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
+                            </StackPanel>
+                        </ListViewItem>
+                        <ListViewItem x:Name="ItemShiftManager"  Height="60">
+                            <StackPanel Orientation="Horizontal">
+                                <materialDesign:PackIcon Kind="Timetable" Width="25" Height="25" VerticalAlignment="Center" Margin="10" />
+                                <TextBlock Text="Shift Manager" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                             </StackPanel>
                         </ListViewItem>
                         <ListViewItem x:Name="ItemLogOut"  Height="60">
@@ -144,10 +157,10 @@
                                 <materialDesign:PackIcon Kind="Logout" Width="25" Height="25" VerticalAlignment="Center" Margin="10" />
                                 <TextBlock Text="Log Out" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
                             </StackPanel>
-                        </ListViewItem>
+                        </ListViewItem>-->
                     </ListView>
                 </Grid>
-                
+
             </StackPanel>
         </Grid>
     </Grid>

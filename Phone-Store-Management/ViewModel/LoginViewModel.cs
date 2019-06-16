@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
-
+using Phone_Store_Management.Windows;
 namespace Phone_Store_Management.ViewModel
 {
     public class LoginViewModel: BaseViewModel
@@ -42,15 +42,19 @@ namespace Phone_Store_Management.ViewModel
 
                 if (roleId != -1)
                 {
-                    Window db = null;
+                    GeneralDashboard db = null;
                     switch (roleId)
                     {
                         //manager or admin
                         case 1:
-                            db = new ManagerDashboard();
+                            //db = new ManagerDashboard();
+                            db = new GeneralDashboard();
+                            db.SetManagerUI();
                             break;
                         case 2:
-                            db = new CashierDashboard();
+                            //db = new CashierDashboard();
+                            db = new GeneralDashboard();
+                            db.SetCashierUI();
                             break;
                         default:
                             break;
@@ -58,6 +62,7 @@ namespace Phone_Store_Management.ViewModel
                     IsLogin = true;
                     //Store user id
                     UserID = new UserDAO().GetUserID(UserName);
+                    db.SetLoggedInUser(new UserDAO().Get(UserID));
                     db.Show();
                     p.Close();
                 }

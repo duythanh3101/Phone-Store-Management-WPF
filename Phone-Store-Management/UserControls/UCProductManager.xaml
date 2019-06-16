@@ -9,9 +9,14 @@
              d:DesignHeight="450" d:DesignWidth="800"
              FontSize="14" Foreground="Black"
              xml:lang="vi-VN">
-    <DockPanel Margin="5 5 5 5">
-        <Button DockPanel.Dock="Top" Content="Hide | Show CRUD Menu" Click="ShowOrHideCRUDMenu_Click"/>
-        <Grid DockPanel.Dock="Top" Name="gridCRUD">
+    <Grid Margin="5 5 5 5">
+        <Grid.RowDefinitions>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition Height="auto"></RowDefinition>
+            <RowDefinition></RowDefinition>
+        </Grid.RowDefinitions>
+        <Button Grid.Row="0" DockPanel.Dock="Top" Content="Hide | Show CRUD Menu" Click="ShowOrHideCRUDMenu_Click"/>
+        <Grid Grid.Row="1" DockPanel.Dock="Top" Name="gridCRUD">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -43,8 +48,9 @@
                 <TextBox x:Name="txtDesc" Text="{Binding Description}" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Description" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
             </StackPanel>
         </Grid>
-        <ScrollViewer DockPanel.Dock="Top" VerticalScrollBarVisibility="Visible">
-            <ListView x:Name="listProducts" SelectionChanged="ListProducts_SelectionChanged">
+        <ScrollViewer Grid.Row="2" DockPanel.Dock="Top" VerticalScrollBarVisibility="Visible">
+        <!--<materialDesign:Card Grid.Row="2" Margin="5" VerticalAlignment="Stretch">-->
+            <ListView x:Name="listProducts" ScrollViewer.CanContentScroll="False" SelectionChanged="ListProducts_SelectionChanged">
                 <ListView.View>
                     <GridView>
                         <GridViewColumn Header="ID" Width="auto" DisplayMemberBinding="{Binding Id}"/>
@@ -75,7 +81,7 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-        </ScrollViewer>
-
-    </DockPanel>
+            </ScrollViewer>
+        <!--</materialDesign:Card>-->
+    </Grid>
 </UserControl>
