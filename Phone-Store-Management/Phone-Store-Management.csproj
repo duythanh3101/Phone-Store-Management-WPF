@@ -82,14 +82,19 @@
     </Compile>
     <Compile Include="DAO\BillDAO.cs" />
     <Compile Include="DAO\BillDetailDAO.cs" />
+    <Compile Include="DAO\CustomerInfoDAO.cs" />
     <Compile Include="DAO\IDao.cs" />
     <Compile Include="DAO\ProductDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
+    <Compile Include="DAO\WarrantyDAO.cs" />
     <Compile Include="Entities\Basket.cs" />
     <Compile Include="Entities\Bill.cs">
       <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\BillDetail.cs">
+      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="Entities\CustomerInfo.cs">
       <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
     </Compile>
     <Compile Include="Entities\DataProvider.cs" />
@@ -121,6 +126,13 @@
     <Compile Include="Entities\User.cs">
       <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
     </Compile>
+    <Compile Include="Entities\Warranty.cs">
+      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
+    </Compile>
+    <Compile Include="GeneralDashboard.xaml.cs">
+      <DependentUpon>GeneralDashboard.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="LVItem.cs" />
     <Compile Include="ManagerDashboard.xaml.cs">
       <DependentUpon>ManagerDashboard.xaml</DependentUpon>
     </Compile>
@@ -133,12 +145,16 @@
     <Compile Include="UserControls\UCPersonalInfo.xaml.cs">
       <DependentUpon>UCPersonalInfo.xaml</DependentUpon>
     </Compile>
+    <Compile Include="UserControls\UCProductManager.xaml.cs">
+      <DependentUpon>UCProductManager.xaml</DependentUpon>
+    </Compile>
     <Compile Include="UserControls\UCSale.xaml.cs">
       <DependentUpon>UCSale.xaml</DependentUpon>
     </Compile>
     <Compile Include="UserControls\UCStaffManager.xaml.cs">
       <DependentUpon>UCStaffManager.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Utilities\Constant.cs" />
     <Compile Include="Utilities\LogError.cs" />
     <Compile Include="Utilities\MoneyConverter.cs" />
     <Compile Include="ViewModel\BaseViewModel.cs" />
@@ -150,7 +166,14 @@
     <Compile Include="Windows\ViewBillDetailWindow.xaml.cs">
       <DependentUpon>ViewBillDetailWindow.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Windows\WarrantyWindow.xaml.cs">
+      <DependentUpon>WarrantyWindow.xaml</DependentUpon>
+    </Compile>
     <Page Include="CashierDashboard.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="GeneralDashboard.xaml">
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
@@ -186,6 +209,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="UserControls\UCProductManager.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
     <Page Include="UserControls\UCSale.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -199,6 +226,10 @@
       <SubType>Designer</SubType>
     </Page>
     <Page Include="Windows\ViewBillDetailWindow.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Windows\WarrantyWindow.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

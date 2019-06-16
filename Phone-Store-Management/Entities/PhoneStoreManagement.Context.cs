@@ -27,9 +27,11 @@ namespace Phone_Store_Management.Entities
     
         public virtual DbSet<Bill> Bills { get; set; }
         public virtual DbSet<BillDetail> BillDetails { get; set; }
+        public virtual DbSet<CustomerInfo> CustomerInfoes { get; set; }
         public virtual DbSet<Product> Products { get; set; }
         public virtual DbSet<Role> Roles { get; set; }
         public virtual DbSet<Type> Types { get; set; }
         public virtual DbSet<User> Users { get; set; }
+        public virtual DbSet<Warranty> Warranties { get; set; }
     }
 }

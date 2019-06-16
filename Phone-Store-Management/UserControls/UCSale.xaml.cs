@@ -8,6 +8,7 @@ using System.Collections.ObjectModel;
 using System.Globalization;
 using System.Linq;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
 using System.Threading.Tasks;
 using System.Windows;
@@ -30,6 +31,9 @@ namespace Phone_Store_Management.UserControls
         private ObservableCollection<Product> listProducts;
         private Basket basket;
         private ProductDAO productDAO;
+        private CustomerInfoDAO customerInfoDAO;
+        private WarrantyDAO warrantyDAO;
+
 
         public UCSale()
         {
@@ -39,6 +43,8 @@ namespace Phone_Store_Management.UserControls
             Thread.CurrentThread.CurrentUICulture = ci;
             total.Text = MoneyConverter.ToDecimal(0);
             productDAO = new ProductDAO();
+            customerInfoDAO = new CustomerInfoDAO();
+            warrantyDAO = new WarrantyDAO();
             basket = new Basket();
 
             listProducts = new ObservableCollection<Product>(productDAO.GetAll().ToList());
@@ -81,7 +87,20 @@ namespace Phone_Store_Management.UserControls
 
         private void PayButton_Click(object sender, RoutedEventArgs e)
         {
-            var basketWindow = new BillDetailWindow(basket);
+            string phoneNumber = txtPhoneNumber.Text.ToString();
+            string customerName = txtCustomerName.Text.ToString();
+            CustomerInfo cus = new CustomerInfo()
+            {
+                PhoneNumber = phoneNumber,
+                CustomerName = customerName
+            };
+
+            Pay(cus);
+        }
+
+        private void Pay(CustomerInfo cus)
+        {
+            var basketWindow = new BillDetailWindow(basket, cus);
             basketWindow.ShowDialog();
 
             if (BillDetailWindow.IsSuccessPayment)
@@ -92,6 +111,11 @@ namespace Phone_Store_Management.UserControls
                 //Update basket
                 basket.Details.Clear();
                 BillDetailWindow.IsSuccessPayment = false;
+
+                //Clear old information in UCSale
+                txtCustomerName.Text = "";
+                txtPhoneNumber.Text = "";
+               
             }
         }
 
@@ -143,6 +167,58 @@ namespace Phone_Store_Management.UserControls
 
             listProductsInCart.Items.Refresh();
             listitem.SelectedItems.Clear();
+        }
+
+        private void PhoneNumber_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            string phoneNumber = txtPhoneNumber.Text.ToString();
+            if (!phoneNumber.Equals(""))
+            {
+                CustomerInfo cus = customerInfoDAO.Get(phoneNumber);
+                if (cus != null)
+                {
+                    txtCustomerName.Text = cus.CustomerName;
+                    txtCustomerName.IsEnabled = false;
+                }
+                else
+                {
+                    txtCustomerName.Text = "";
+                    txtCustomerName.IsEnabled = true;
+                }
+            }
+            EnablePayButton();
+        }
+
+        public void EnablePayButton()
+        {
+            string phoneNumber = txtPhoneNumber.Text.ToString();
+            string customerName = txtCustomerName.Text.ToString();
+            if (!phoneNumber.Equals("") && !customerName.Equals(""))
+            {
+                PayButton.IsEnabled = true;
+            }
+            else
+            {
+                PayButton.IsEnabled = false;
+            }
+
+        }
+
+        private void NumberValidationTextBox(object sender, TextCompositionEventArgs e)
+        {
+            Regex regex = new Regex("[^0-9]+");
+            e.Handled = regex.IsMatch(e.Text);
+        }
+
+        private void SearchWarranty_Click(object sender, RoutedEventArgs e)
+        {
+            var warrantyWindow = new WarrantyWindow();
+            warrantyWindow.ShowDialog();
+        }
+
+        private void CustomerName_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            EnablePayButton();
         }
     }
 }

@@ -12,27 +12,17 @@ namespace Phone_Store_Management.Entities
     using System;
     using System.Collections.Generic;
     
-    public partial class Product
+    public partial class CustomerInfo
     {
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2214:DoNotCallOverridableMethodsInConstructors")]
-        public Product()
+        public CustomerInfo()
         {
-            this.BillDetails = new HashSet<BillDetail>();
             this.Warranties = new HashSet<Warranty>();
         }
     
-        public int Id { get; set; }
-        public string DisplayName { get; set; }
-        public string Brand { get; set; }
-        public int TypeId { get; set; }
-        public double Price { get; set; }
-        public string Description { get; set; }
-        public int Quantity { get; set; }
-        public string ImageURL { get; set; }
+        public string PhoneNumber { get; set; }
+        public string CustomerName { get; set; }
     
-        [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
-        public virtual ICollection<BillDetail> BillDetails { get; set; }
-        public virtual Type Type { get; set; }
         [System.Diagnostics.CodeAnalysis.SuppressMessage("Microsoft.Usage", "CA2227:CollectionPropertiesShouldBeReadOnly")]
         public virtual ICollection<Warranty> Warranties { get; set; }
     }

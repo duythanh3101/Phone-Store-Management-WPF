@@ -24,6 +24,13 @@
           <Property Name="Amount" Type="int" Nullable="false" />
           <Property Name="UnitPrice" Type="float" Nullable="false" />
         </EntityType>
+        <EntityType Name="CustomerInfo">
+          <Key>
+            <PropertyRef Name="PhoneNumber" />
+          </Key>
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="CustomerName" Type="nvarchar" MaxLength="50" Nullable="false" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
@@ -58,11 +65,21 @@
           <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
           <Property Name="RoleId" Type="int" Nullable="false" />
           <Property Name="DisplayName" Type="nvarchar(max)" />
-          <Property Name="UserName" Type="nchar" MaxLength="50" />
-          <Property Name="Password" Type="nchar" MaxLength="50" />
-          <Property Name="IdentityCard" Type="nchar" MaxLength="10" />
+          <Property Name="UserName" Type="nvarchar" MaxLength="50" />
+          <Property Name="Password" Type="nvarchar" MaxLength="50" />
+          <Property Name="IdentityCard" Type="nvarchar" MaxLength="10" />
           <Property Name="Birthdate" Type="datetime" />
           <Property Name="Address" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="Warranty">
+          <Key>
+            <PropertyRef Name="WarrantyID" />
+          </Key>
+          <Property Name="WarrantyID" Type="int" Nullable="false" />
+          <Property Name="PhoneNumber" Type="nvarchar" MaxLength="10" Nullable="false" />
+          <Property Name="ProductID" Type="int" Nullable="false" />
+          <Property Name="StartDate" Type="datetime" Nullable="false" />
+          <Property Name="EndDate" Type="datetime" Nullable="false" />
         </EntityType>
         <Association Name="FK__Bill__CashierID__1BFD2C07">
           <End Role="Users" Type="Self.Users" Multiplicity="1" />
@@ -124,13 +141,39 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Warranty__PhoneN__02084FDA">
+          <End Role="CustomerInfo" Type="Self.CustomerInfo" Multiplicity="1" />
+          <End Role="Warranty" Type="Self.Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerInfo">
+              <PropertyRef Name="PhoneNumber" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="PhoneNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warranty__Produc__01142BA1">
+          <End Role="Product" Type="Self.Product" Multiplicity="1" />
+          <End Role="Warranty" Type="Self.Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="ProductID" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="DBStoreManagementModelStoreContainer">
           <EntitySet Name="Bill" EntityType="Self.Bill" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="BillDetail" EntityType="Self.BillDetail" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="CustomerInfo" EntityType="Self.CustomerInfo" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Product" EntityType="Self.Product" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Role" EntityType="Self.Role" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Type" EntityType="Self.Type" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Users" EntityType="Self.Users" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Warranty" EntityType="Self.Warranty" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK__Bill__CashierID__1BFD2C07" Association="Self.FK__Bill__CashierID__1BFD2C07">
             <End Role="Users" EntitySet="Users" />
             <End Role="Bill" EntitySet="Bill" />
@@ -151,6 +194,14 @@
             <End Role="Role" EntitySet="Role" />
             <End Role="Users" EntitySet="Users" />
           </AssociationSet>
+          <AssociationSet Name="FK__Warranty__PhoneN__02084FDA" Association="Self.FK__Warranty__PhoneN__02084FDA">
+            <End Role="CustomerInfo" EntitySet="CustomerInfo" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warranty__Produc__01142BA1" Association="Self.FK__Warranty__Produc__01142BA1">
+            <End Role="Product" EntitySet="Product" />
+            <End Role="Warranty" EntitySet="Warranty" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -159,10 +210,12 @@
         <EntityContainer Name="DBStoreManagementEntities" annotation:LazyLoadingEnabled="true">
           <EntitySet Name="Bills" EntityType="DBStoreManagementModel.Bill" />
           <EntitySet Name="BillDetails" EntityType="DBStoreManagementModel.BillDetail" />
+          <EntitySet Name="CustomerInfoes" EntityType="DBStoreManagementModel.CustomerInfo" />
           <EntitySet Name="Products" EntityType="DBStoreManagementModel.Product" />
           <EntitySet Name="Roles" EntityType="DBStoreManagementModel.Role" />
           <EntitySet Name="Types" EntityType="DBStoreManagementModel.Type" />
           <EntitySet Name="Users" EntityType="DBStoreManagementModel.User" />
+          <EntitySet Name="Warranties" EntityType="DBStoreManagementModel.Warranty" />
           <AssociationSet Name="FK__Bill__CashierID__1BFD2C07" Association="DBStoreManagementModel.FK__Bill__CashierID__1BFD2C07">
             <End Role="User" EntitySet="Users" />
             <End Role="Bill" EntitySet="Bills" />
@@ -175,9 +228,17 @@
             <End Role="Product" EntitySet="Products" />
             <End Role="BillDetail" EntitySet="BillDetails" />
           </AssociationSet>
+          <AssociationSet Name="FK__Warranty__PhoneN__02084FDA" Association="DBStoreManagementModel.FK__Warranty__PhoneN__02084FDA">
+            <End Role="CustomerInfo" EntitySet="CustomerInfoes" />
+            <End Role="Warranty" EntitySet="Warranties" />
+          </AssociationSet>
           <AssociationSet Name="FK__Product__ImageUR__182C9B23" Association="DBStoreManagementModel.FK__Product__ImageUR__182C9B23">
             <End Role="Type" EntitySet="Types" />
             <End Role="Product" EntitySet="Products" />
+          </AssociationSet>
+          <AssociationSet Name="FK__Warranty__Produc__01142BA1" Association="DBStoreManagementModel.FK__Warranty__Produc__01142BA1">
+            <End Role="Product" EntitySet="Products" />
+            <End Role="Warranty" EntitySet="Warranties" />
           </AssociationSet>
           <AssociationSet Name="FK__Users__RoleId__1273C1CD" Association="DBStoreManagementModel.FK__Users__RoleId__1273C1CD">
             <End Role="Role" EntitySet="Roles" />
@@ -207,6 +268,14 @@
           <NavigationProperty Name="Bill" Relationship="DBStoreManagementModel.FK__BillDetai__BillI__1ED998B2" FromRole="BillDetail" ToRole="Bill" />
           <NavigationProperty Name="Product" Relationship="DBStoreManagementModel.FK__BillDetai__Produ__1FCDBCEB" FromRole="BillDetail" ToRole="Product" />
         </EntityType>
+        <EntityType Name="CustomerInfo">
+          <Key>
+            <PropertyRef Name="PhoneNumber" />
+          </Key>
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="CustomerName" Type="String" Nullable="false" MaxLength="50" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="Warranties" Relationship="DBStoreManagementModel.FK__Warranty__PhoneN__02084FDA" FromRole="CustomerInfo" ToRole="Warranty" />
+        </EntityType>
         <EntityType Name="Product">
           <Key>
             <PropertyRef Name="Id" />
@@ -221,6 +290,7 @@
           <Property Name="ImageURL" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="BillDetails" Relationship="DBStoreManagementModel.FK__BillDetai__Produ__1FCDBCEB" FromRole="Product" ToRole="BillDetail" />
           <NavigationProperty Name="Type" Relationship="DBStoreManagementModel.FK__Product__ImageUR__182C9B23" FromRole="Product" ToRole="Type" />
+          <NavigationProperty Name="Warranties" Relationship="DBStoreManagementModel.FK__Warranty__Produc__01142BA1" FromRole="Product" ToRole="Warranty" />
         </EntityType>
         <EntityType Name="Role">
           <Key>
@@ -245,13 +315,25 @@
           <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
           <Property Name="RoleId" Type="Int32" Nullable="false" />
           <Property Name="DisplayName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="Password" Type="String" MaxLength="50" FixedLength="true" Unicode="true" />
-          <Property Name="IdentityCard" Type="String" MaxLength="10" FixedLength="true" Unicode="true" />
+          <Property Name="UserName" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="Password" Type="String" MaxLength="50" FixedLength="false" Unicode="true" />
+          <Property Name="IdentityCard" Type="String" MaxLength="10" FixedLength="false" Unicode="true" />
           <Property Name="Birthdate" Type="DateTime" Precision="3" />
           <Property Name="Address" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <NavigationProperty Name="Bills" Relationship="DBStoreManagementModel.FK__Bill__CashierID__1BFD2C07" FromRole="User" ToRole="Bill" />
           <NavigationProperty Name="Role" Relationship="DBStoreManagementModel.FK__Users__RoleId__1273C1CD" FromRole="User" ToRole="Role" />
+        </EntityType>
+        <EntityType Name="Warranty">
+          <Key>
+            <PropertyRef Name="WarrantyID" />
+          </Key>
+          <Property Name="WarrantyID" Type="Int32" Nullable="false" />
+          <Property Name="PhoneNumber" Type="String" Nullable="false" MaxLength="10" FixedLength="false" Unicode="true" />
+          <Property Name="ProductID" Type="Int32" Nullable="false" />
+          <Property Name="StartDate" Type="DateTime" Nullable="false" Precision="3" />
+          <Property Name="EndDate" Type="DateTime" Nullable="false" Precision="3" />
+          <NavigationProperty Name="CustomerInfo" Relationship="DBStoreManagementModel.FK__Warranty__PhoneN__02084FDA" FromRole="Warranty" ToRole="CustomerInfo" />
+          <NavigationProperty Name="Product" Relationship="DBStoreManagementModel.FK__Warranty__Produc__01142BA1" FromRole="Warranty" ToRole="Product" />
         </EntityType>
         <Association Name="FK__Bill__CashierID__1BFD2C07">
           <End Type="DBStoreManagementModel.User" Role="User" Multiplicity="1" />
@@ -289,6 +371,18 @@
             </Dependent>
           </ReferentialConstraint>
         </Association>
+        <Association Name="FK__Warranty__PhoneN__02084FDA">
+          <End Type="DBStoreManagementModel.CustomerInfo" Role="CustomerInfo" Multiplicity="1" />
+          <End Type="DBStoreManagementModel.Warranty" Role="Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="CustomerInfo">
+              <PropertyRef Name="PhoneNumber" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="PhoneNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <Association Name="FK__Product__ImageUR__182C9B23">
           <End Type="DBStoreManagementModel.Type" Role="Type" Multiplicity="1" />
           <End Type="DBStoreManagementModel.Product" Role="Product" Multiplicity="*" />
@@ -298,6 +392,18 @@
             </Principal>
             <Dependent Role="Product">
               <PropertyRef Name="TypeId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK__Warranty__Produc__01142BA1">
+          <End Type="DBStoreManagementModel.Product" Role="Product" Multiplicity="1" />
+          <End Type="DBStoreManagementModel.Warranty" Role="Warranty" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Product">
+              <PropertyRef Name="Id" />
+            </Principal>
+            <Dependent Role="Warranty">
+              <PropertyRef Name="ProductID" />
             </Dependent>
           </ReferentialConstraint>
         </Association>
@@ -336,6 +442,14 @@
                 <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="ProductId" ColumnName="ProductId" />
                 <ScalarProperty Name="BillID" ColumnName="BillID" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="CustomerInfoes">
+            <EntityTypeMapping TypeName="DBStoreManagementModel.CustomerInfo">
+              <MappingFragment StoreEntitySet="CustomerInfo">
+                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
@@ -380,6 +494,17 @@
                 <ScalarProperty Name="DisplayName" ColumnName="DisplayName" />
                 <ScalarProperty Name="RoleId" ColumnName="RoleId" />
                 <ScalarProperty Name="Id" ColumnName="Id" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Warranties">
+            <EntityTypeMapping TypeName="DBStoreManagementModel.Warranty">
+              <MappingFragment StoreEntitySet="Warranty">
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ProductID" ColumnName="ProductID" />
+                <ScalarProperty Name="PhoneNumber" ColumnName="PhoneNumber" />
+                <ScalarProperty Name="WarrantyID" ColumnName="WarrantyID" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
