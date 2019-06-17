@@ -36,6 +36,18 @@ namespace Phone_Store_Management.UserControls
 
             LoadList();
             listUsers.SelectionChanged += Listitem_SelectionChanged;
+
+            
+        }
+
+        private bool UserFilter(object obj)
+        {
+            if (string.IsNullOrEmpty(txtFilter.Text))
+            {
+                return true;
+            }
+            User user = obj as User;
+            return (user.DisplayName.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
         }
 
         private void Listitem_SelectionChanged(object sender, SelectionChangedEventArgs e)
@@ -78,6 +90,10 @@ namespace Phone_Store_Management.UserControls
         {
             list = new ObservableCollection<User>(userDAO.GetAll().ToList());
             listUsers.ItemsSource = list;
+
+            //Filter
+            CollectionView view = CollectionViewSource.GetDefaultView(listUsers.ItemsSource) as CollectionView;
+            view.Filter = UserFilter;
         }
 
         private void InsertButton_Click(object sender, RoutedEventArgs e)
@@ -130,6 +146,11 @@ namespace Phone_Store_Management.UserControls
                 LoadList();
                 MessageBox.Show("Delete is Successfully");
             }
+        }
+
+        private void TxtFilter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(listUsers.ItemsSource).Refresh();
         }
     }
 }

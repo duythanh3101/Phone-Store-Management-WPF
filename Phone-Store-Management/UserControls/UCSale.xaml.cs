@@ -52,6 +52,10 @@ namespace Phone_Store_Management.UserControls
             listProductsInCart.ItemsSource = basket.Details;
 
             basket.Details.CollectionChanged += Details_CollectionChanged;
+
+            //Filter
+            CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listitem.ItemsSource);
+            view.Filter = UserFilter;
         }
 
         private void Details_CollectionChanged(object sender, System.Collections.Specialized.NotifyCollectionChangedEventArgs e)
@@ -61,28 +65,13 @@ namespace Phone_Store_Management.UserControls
                 //update listview display products
                 listProducts = new ObservableCollection<Product>(productDAO.GetAll().ToList());
                 listitem.ItemsSource = listProducts;
+
+                //Filter
+                CollectionView view = (CollectionView)CollectionViewSource.GetDefaultView(listitem.ItemsSource);
+                view.Filter = UserFilter;
             }
             double totalprice = basket.TotalPrice();
             total.Text = MoneyConverter.ToDecimal(totalprice);
-        }
-
-        private void AddProductInCart_Click(object sender, MouseButtonEventArgs e)
-        {
-            try
-            {
-                Product pr = (Product)listitem.SelectedItems[0];
-                if (!productDAO.IsOutOfItems(pr.Id))
-                {
-                    basket.AddDetail(pr.Id, pr.Price, pr.DisplayName, pr.Quantity);
-                }
-
-                listProductsInCart.Items.Refresh();
-                listitem.SelectedItems.Clear();
-            }
-            catch
-            {
-
-            }
         }
 
         private void PayButton_Click(object sender, RoutedEventArgs e)
@@ -220,5 +209,23 @@ namespace Phone_Store_Management.UserControls
         {
             EnablePayButton();
         }
+
+        private void TxtFilter_TextChanged(object sender, TextChangedEventArgs e)
+        {
+            CollectionViewSource.GetDefaultView(listitem.ItemsSource).Refresh();
+        }
+
+        private bool UserFilter(object obj)
+        {
+            if (string.IsNullOrEmpty(txtFilter.Text))
+            {
+                return true;
+            }
+
+            return ((obj as Product).DisplayName.IndexOf(txtFilter.Text, StringComparison.OrdinalIgnoreCase) >= 0);
+
+        }
+
+
     }
 }

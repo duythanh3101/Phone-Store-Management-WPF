@@ -35,13 +35,17 @@
             </WrapPanel>
         </StackPanel>
 
-        <Grid Grid.Row="1" Margin="5">
+        <StackPanel Grid.Row="1" Margin="5" Orientation="Vertical">
             <WrapPanel>
                 <Button  Content="Add new" Margin="5" Width="100" Click="InsertButton_Click"></Button>
                 <Button  Content="Update" Margin="5" Width="100" Click="UpdateButton_Click"></Button>
                 <Button  Content="Delete" Margin="5" Width="100" Background="#FFD93647" BorderBrush="#FFD93647" Click="DeleteButton_Click"></Button>
             </WrapPanel>
-        </Grid>
+            <WrapPanel>
+                <TextBox x:Name="txtFilter" Foreground="#DD3A3A3A" Width="120" Text="{Binding RoleId}" Margin="20 5 15 5" materialDesign:HintAssist.Hint="Search" Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextChanged="TxtFilter_TextChanged" />
+                <Button Content="Find" Width="100"></Button>
+            </WrapPanel>
+        </StackPanel>
 
         <Grid Grid.Row="2" Margin="5" VerticalAlignment="Stretch">
             <ScrollViewer VerticalScrollBarVisibility="Auto">

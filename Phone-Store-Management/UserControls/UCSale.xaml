@@ -23,10 +23,10 @@
                     <RowDefinition Height="auto"></RowDefinition>
                     <RowDefinition ></RowDefinition>
                 </Grid.RowDefinitions>
-                <TextBox Margin="0,30,0,0" x:Name="search" Grid.Row="0"
+                <TextBox Margin="0,30,0,0" x:Name="txtFilter" Grid.Row="0"
                     materialDesign:HintAssist.Hint="Search"
-                  materialDesign:HintAssist.HintOpacity=".26"
-                  Width="2700" Background="{x:Null}" />
+                  Foreground="Black" TextChanged="TxtFilter_TextChanged"
+                  Width="800" Background="{x:Null}" />
                 <ListView x:Name="listitem" Grid.Row="1" HorizontalAlignment="Stretch" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="False" 
                            ItemsSource="{Binding}">
                     <ListView.ItemsPanel>
