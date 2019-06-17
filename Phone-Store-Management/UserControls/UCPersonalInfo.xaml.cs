@@ -24,5 +24,10 @@ namespace Phone_Store_Management.UserControls
         {
             InitializeComponent();
         }
+
+        private void EditButton_Click(object sender, RoutedEventArgs e)
+        {
+
+        }
     }
 }
