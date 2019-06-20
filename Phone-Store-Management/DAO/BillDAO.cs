@@ -26,14 +26,14 @@ namespace Phone_Store_Management.DAO
                 using (var db = new DBStoreManagementEntities())
                 {
                     //Delete all bill details
-                    List<BillDetail> details = (from rows in db.BillDetails where rows.BillID == obj.BillID select rows).ToList();
+                    List<BillDetail> details = (from rows in db.BillDetails where rows.BillId == obj.Id select rows).ToList();
                     foreach (var item in details)
                     {
                         db.BillDetails.Remove(item);    
                     }
 
                     //After that delete bill
-                    obj = (from rows in db.Bills where obj.BillID == rows.BillID select rows).SingleOrDefault();
+                    obj = (from rows in db.Bills where obj.Id == rows.Id select rows).SingleOrDefault();
                     if (obj != null)
                     {
                         db.Bills.Remove(obj);
@@ -56,7 +56,7 @@ namespace Phone_Store_Management.DAO
                 using (var db = new DBStoreManagementEntities())
                 {
                     Bill bill = db.Bills.Find(id);
-                    ICollection<BillDetail> lst = (from rows in db.BillDetails where rows.BillID == bill.BillID select rows).ToList();
+                    ICollection<BillDetail> lst = (from rows in db.BillDetails where rows.BillId == bill.Id select rows).ToList();
                     bill.BillDetails = lst;
                     return bill;
                 }

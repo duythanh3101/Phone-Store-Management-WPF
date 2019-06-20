@@ -106,7 +106,7 @@ namespace Phone_Store_Management.UserControls
             //var lst = new List<BillDetail>();
             Bill bill = (sender as Button).DataContext as Bill;
             //bill = billBUS.Get(bill.BillID);
-            var lst = billDetailBUS.GetAllByID(bill.BillID);
+            var lst = billDetailBUS.GetAllByID(bill.Id);
                 if (lst != null)
             {
                 var viewbilldetailWindow = new ViewBillDetailWindow(lst);

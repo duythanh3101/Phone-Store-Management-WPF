@@ -72,7 +72,7 @@ namespace Phone_Store_Management.Windows
             Bill bill = new Bill()
             {
                 BillDate = DateTime.Now,
-                CashierID = LoginViewModel.UserID,
+                UserId = LoginViewModel.UserID,
                 TotalPrice = basket.TotalPrice()
             };
 
@@ -82,7 +82,7 @@ namespace Phone_Store_Management.Windows
                 //Thêm vào bảng chi tiết hóa đơn
                 BillDetail detail = new BillDetail()
                 {
-                    BillID = bill.BillID,
+                    BillId = bill.Id,
                     ProductId = item.ProductId,
                     Amount = item.Quantity,
                     UnitPrice = item.UnitPrice,

@@ -40,8 +40,8 @@
     <Reference Include="EntityFramework.SqlServer, Version=6.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089, processorArchitecture=MSIL">
       <HintPath>..\packages\EntityFramework.6.1.3\lib\net45\EntityFramework.SqlServer.dll</HintPath>
     </Reference>
-    <Reference Include="MaterialDesignColors, Version=1.1.2.0, Culture=neutral, processorArchitecture=MSIL">
-      <HintPath>..\packages\MaterialDesignColors.1.1.2\lib\net45\MaterialDesignColors.dll</HintPath>
+    <Reference Include="MaterialDesignColors, Version=1.1.3.0, Culture=neutral, processorArchitecture=MSIL">
+      <HintPath>..\packages\MaterialDesignColors.1.1.3\lib\net45\MaterialDesignColors.dll</HintPath>
     </Reference>
     <Reference Include="MaterialDesignThemes.Wpf, Version=2.5.1.1345, Culture=neutral, processorArchitecture=MSIL">
       <HintPath>..\packages\MaterialDesignThemes.2.5.1\lib\net45\MaterialDesignThemes.Wpf.dll</HintPath>
@@ -88,47 +88,17 @@
     <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="DAO\WarrantyDAO.cs" />
     <Compile Include="Entities\Basket.cs" />
-    <Compile Include="Entities\Bill.cs">
-      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\BillDetail.cs">
-      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\CustomerInfo.cs">
-      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Entities\Bill.cs" />
+    <Compile Include="Entities\BillDetail.cs" />
+    <Compile Include="Entities\CustomerInfo.cs" />
     <Compile Include="Entities\DataProvider.cs" />
-    <Compile Include="Entities\PhoneStoreManagement.Context.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PhoneStoreManagement.Context.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\PhoneStoreManagement.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\PhoneStoreManagement.Designer.cs">
-      <AutoGen>True</AutoGen>
-      <DesignTime>True</DesignTime>
-      <DependentUpon>PhoneStoreManagement.edmx</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Product.cs">
-      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
-    </Compile>
     <Compile Include="Entities\BasketDetails.cs" />
-    <Compile Include="Entities\Role.cs">
-      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Type.cs">
-      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\User.cs">
-      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
-    </Compile>
-    <Compile Include="Entities\Warranty.cs">
-      <DependentUpon>PhoneStoreManagement.tt</DependentUpon>
-    </Compile>
+    <Compile Include="Entities\DBStoreManagementEntities.cs" />
+    <Compile Include="Entities\Product.cs" />
+    <Compile Include="Entities\Role.cs" />
+    <Compile Include="Entities\Type.cs" />
+    <Compile Include="Entities\User.cs" />
+    <Compile Include="Entities\Warranty.cs" />
     <Compile Include="GeneralDashboard.xaml.cs">
       <DependentUpon>GeneralDashboard.xaml</DependentUpon>
     </Compile>
@@ -252,13 +222,6 @@
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
     </EmbeddedResource>
-    <EntityDeploy Include="Entities\PhoneStoreManagement.edmx">
-      <Generator>EntityModelCodeGenerator</Generator>
-      <LastGenOutput>PhoneStoreManagement.Designer.cs</LastGenOutput>
-    </EntityDeploy>
-    <None Include="Entities\PhoneStoreManagement.edmx.diagram">
-      <DependentUpon>PhoneStoreManagement.edmx</DependentUpon>
-    </None>
     <None Include="packages.config" />
     <None Include="PhoneStoreManangement.cd" />
     <None Include="Properties\Settings.settings">
@@ -285,18 +248,5 @@
   <ItemGroup>
     <Service Include="{508349B6-6B84-4DF5-91F0-309BEEBAD82D}" />
   </ItemGroup>
-  <ItemGroup>
-    <Content Include="Entities\PhoneStoreManagement.Context.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PhoneStoreManagement.edmx</DependentUpon>
-      <LastGenOutput>PhoneStoreManagement.Context.cs</LastGenOutput>
-    </Content>
-    <Content Include="Entities\PhoneStoreManagement.tt">
-      <Generator>TextTemplatingFileGenerator</Generator>
-      <DependentUpon>PhoneStoreManagement.edmx</DependentUpon>
-      <LastGenOutput>PhoneStoreManagement.cs</LastGenOutput>
-    </Content>
-  </ItemGroup>
-  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

@@ -60,7 +60,7 @@ namespace Phone_Store_Management.UserControls
                 txtPassword.Text = user.Password.ToString();
                 txtDisplayName.Text = user.DisplayName.ToString();
                 txtRoleId.Text = user.RoleId.ToString();
-                txtIdentityCard.Text = user.IdentityCard.ToString();
+                txtIdentityCard.Text = user.IdentityID.ToString();
                 txtAddress.Text = user.Address;
                 dpkBirthdate.Text = user.Birthdate.ToString();
             }
@@ -76,7 +76,7 @@ namespace Phone_Store_Management.UserControls
                 user.Password = txtPassword.Text.ToString();
                 user.DisplayName = txtDisplayName.Text.ToString();
                 user.RoleId = int.Parse(txtRoleId.Text.ToString());
-                user.IdentityCard = txtIdentityCard.Text.ToString();
+                user.IdentityID = txtIdentityCard.Text.ToString();
                 user.Address = txtAddress.Text.ToString();
                 user.Birthdate = Convert.ToDateTime(dpkBirthdate.Text.ToString());
 
@@ -112,7 +112,7 @@ namespace Phone_Store_Management.UserControls
                     Password = txtPassword.Text.ToString(),
                     DisplayName = txtDisplayName.Text.ToString(),
                     RoleId = int.Parse(txtRoleId.Text.ToString()),
-                    IdentityCard = txtIdentityCard.Text.ToString(),
+                    IdentityID = txtIdentityCard.Text.ToString(),
                     Address = txtAddress.Text.ToString(),
                     Birthdate = Convert.ToDateTime(dpkBirthdate.Text.ToString())
                 };

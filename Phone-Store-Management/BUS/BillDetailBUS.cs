@@ -18,7 +18,7 @@ namespace Phone_Store_Management.BUS
 
         public List<BillDetail> GetAllByID(int id)
         {
-            return billDetailDAO.GetAll().FindAll(b => b.BillID == id);
+            return billDetailDAO.GetAll().FindAll(b => b.BillId == id);
         }
     }
 }

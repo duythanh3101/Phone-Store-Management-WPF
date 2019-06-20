@@ -19,7 +19,7 @@ namespace Phone_Store_Management.BUS
 
             lst = lst.FindAll(b => b.BillDate >= startDate);
             lst = lst.FindAll(b => b.BillDate <= endDate);
-            lst = lst.FindAll(b => b.CashierID == CashierID);
+            lst = lst.FindAll(b => b.UserId == CashierID);
             if (lst.Count > 0)
             {
                 return new ObservableCollection<Bill>(lst);
@@ -29,7 +29,7 @@ namespace Phone_Store_Management.BUS
 
         public List<Bill> GetAllByID(int UserID)
         {
-            return billDAO.GetAll().FindAll(d => d.CashierID == UserID);
+            return billDAO.GetAll().FindAll(d => d.UserId == UserID);
         }
 
         public List<Bill> GetAll()

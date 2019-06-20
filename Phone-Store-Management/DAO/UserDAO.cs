@@ -126,7 +126,7 @@ namespace Phone_Store_Management.DAO
                     if (UserName.Equals(user.UserName.Replace(" ", string.Empty))
                         && Password.Equals(user.Password.Replace(" ", string.Empty)))
                     {
-                        return user.Role.RoleId;
+                        return user.Role.Id;
                     }
                 }
 

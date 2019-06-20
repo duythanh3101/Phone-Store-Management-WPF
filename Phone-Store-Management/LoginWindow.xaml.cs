@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Phone_Store_Management.Entities;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,8 +25,7 @@ namespace Phone_Store_Management
         {
             InitializeComponent();
             txtUserName.Focus();
-            txtUserName.Text = "admin";
-            PasswordBox.Password = "admin";
+            DBStoreManagementEntities db = new DBStoreManagementEntities();
         }
 
         private void LoginWindow_MouseLeftButtonDown(object sender, MouseButtonEventArgs e)
