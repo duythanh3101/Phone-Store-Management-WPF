@@ -22,6 +22,7 @@ namespace Phone_Store_Management
     /// </summary>
     public partial class GeneralDashboard : Window
     {
+        public static int userID;
         public GeneralDashboard()
         {
             InitializeComponent();
@@ -32,6 +33,7 @@ namespace Phone_Store_Management
         {
             txtLoggedInUser.Text = user.DisplayName;
             txtWelcomeText.Text = "Hi, " + user.DisplayName + "!";
+            userID = user.Id;
         }
 
         public void SetCashierUI()
@@ -48,6 +50,7 @@ namespace Phone_Store_Management
             ListViewMenu.Items.Add(new LVItem("ItemStatistics", "Statistics", MaterialDesignThemes.Wpf.PackIconKind.ChartBar));
             ListViewMenu.Items.Add(new LVItem("ItemStaffManager", "Staff Manager", MaterialDesignThemes.Wpf.PackIconKind.UserSupervisor));
             ListViewMenu.Items.Add(new LVItem("ItemBill", "Bill History", MaterialDesignThemes.Wpf.PackIconKind.Receipt));
+            ListViewMenu.Items.Add(new LVItem("ItemPersonalInfo", "Personal Info", MaterialDesignThemes.Wpf.PackIconKind.UserCardDetails));
             ListViewMenu.Items.Add(new LVItem("ItemLogOut", "Log out", MaterialDesignThemes.Wpf.PackIconKind.Logout));
         }
 

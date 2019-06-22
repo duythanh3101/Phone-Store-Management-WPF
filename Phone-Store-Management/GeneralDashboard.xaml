@@ -116,48 +116,7 @@
                     </materialDesign:TransitioningContent>
                     <!--Menu List-->
                     <ListView x:Name="ListViewMenu" Foreground="#FF5C99D6" ScrollViewer.HorizontalScrollBarVisibility="Disabled" SelectionChanged="ListViewMenu_SelectionChanged" Margin="0 10 0 0">
-                        <!--<ListViewItem x:Name="ItemSale" Height="60">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Shopify" Width="25" Height="25" VerticalAlignment="Center" Margin="10" />
-                                <TextBlock Text="Sale" FontSize="17" VerticalAlignment="Center" Margin="20 10" />
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem x:Name="ItemProductManager"  Height="60">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="AddShoppingCart" Width="25" Height="25" VerticalAlignment="Center" Margin="10" />
-                                <TextBlock Text="Product Manager" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem x:Name="ItemStatistics"  Height="60">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="ChartBar" Width="25" Height="25" VerticalAlignment="Center" Margin="10" />
-                                <TextBlock Text="Statistics" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem x:Name="ItemStaffManager"  Height="60">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="UserSupervisor" Width="25" Height="25" VerticalAlignment="Center" Margin="10" />
-                                <TextBlock Text="Staff Manager" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem x:Name="ItemBill"  Height="60">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Receipt" Width="25" Height="25" VerticalAlignment="Center" Margin="10" />
-                                <TextBlock Text="Bill History" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem x:Name="ItemShiftManager"  Height="60">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Timetable" Width="25" Height="25" VerticalAlignment="Center" Margin="10" />
-                                <TextBlock Text="Shift Manager" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
-                            </StackPanel>
-                        </ListViewItem>
-                        <ListViewItem x:Name="ItemLogOut"  Height="60">
-                            <StackPanel Orientation="Horizontal">
-                                <materialDesign:PackIcon Kind="Logout" Width="25" Height="25" VerticalAlignment="Center" Margin="10" />
-                                <TextBlock Text="Log Out" FontSize="17" VerticalAlignment="Center" Margin="20 0" />
-                            </StackPanel>
-                        </ListViewItem>-->
+
                     </ListView>
                 </Grid>
 

@@ -29,7 +29,7 @@
             </WrapPanel>
             <WrapPanel Margin="0 0 0 10">
                 <TextBox x:Name="txtRoleId" Foreground="#DD3A3A3A" Width="120" Text="{Binding RoleId}" Margin="20 5 15 5" materialDesign:HintAssist.Hint="Role ID" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
-                <TextBox x:Name="txtIdentityCard" Foreground="#DD3A3A3A" Width="120" Text="{Binding IdentityCard}" Margin="20 5 15 5" materialDesign:HintAssist.Hint="Identity Card" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
+                <TextBox x:Name="txtIdentityCard" Foreground="#DD3A3A3A" Width="120" Text="{Binding IdentityID}" Margin="20 5 15 5" materialDesign:HintAssist.Hint="Identity Card" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 <TextBox x:Name="txtAddress" Foreground="#DD3A3A3A" Width="120" Text="{Binding Address}" Margin="20 5 15 5" materialDesign:HintAssist.Hint="Address" Style="{StaticResource MaterialDesignFloatingHintTextBox}" />
                 <DatePicker x:Name="dpkBirthdate"  Foreground="#DD3A3A3A" VerticalAlignment="Center" SelectedDate="{Binding ContractDate, StringFormat='dd/MM/yyyy'}" Width="120" Margin="20 5 15 -7" materialDesign:HintAssist.Hint="Birthdate" Style="{StaticResource MaterialDesignFloatingHintDatePicker}" />
             </WrapPanel>
@@ -52,14 +52,14 @@
                 <ListView x:Name="listUsers">
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="User Id" Width="100" DisplayMemberBinding="{Binding Id}"></GridViewColumn>
-                            <GridViewColumn Header="User Name" Width="150" DisplayMemberBinding="{Binding UserName}"></GridViewColumn>
-                            <GridViewColumn Header="Password" Width="100" DisplayMemberBinding="{Binding Password}"></GridViewColumn>
-                            <GridViewColumn Header="Role ID"  Width="100"  DisplayMemberBinding="{Binding RoleId}"></GridViewColumn>
-                            <GridViewColumn Header="Full Name" Width="150" DisplayMemberBinding="{Binding DisplayName}"></GridViewColumn>
-                            <GridViewColumn Header="Birthdate"  Width="120"  DisplayMemberBinding="{Binding Birthdate, StringFormat='dd/MM/yyyy'}"></GridViewColumn>
-                            <GridViewColumn Header="Identity Card" Width="100" DisplayMemberBinding="{Binding IdentityCard}"></GridViewColumn>
-                            <GridViewColumn Header="Address"  Width="150"  DisplayMemberBinding="{Binding Address}"></GridViewColumn>
+                            <GridViewColumn Header="User Id" DisplayMemberBinding="{Binding Id}"/>
+                            <GridViewColumn Header="User Name" DisplayMemberBinding="{Binding UserName}"/>
+                            <GridViewColumn Header="Password" DisplayMemberBinding="{Binding Password}"/>
+                            <GridViewColumn Header="Role ID" DisplayMemberBinding="{Binding RoleId}"/>
+                            <GridViewColumn Header="Full Name" DisplayMemberBinding="{Binding DisplayName}"/>
+                            <GridViewColumn Header="Birthdate" DisplayMemberBinding="{Binding Birthdate, StringFormat='dd/MM/yyyy'}"/>
+                            <GridViewColumn Header="Identity Card" DisplayMemberBinding="{Binding IdentityID}"/>
+                            <GridViewColumn Header="Address" DisplayMemberBinding="{Binding Address}"/>
                         </GridView>
                     </ListView.View>
                 </ListView>
