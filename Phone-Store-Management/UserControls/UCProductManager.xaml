@@ -15,8 +15,8 @@
             <RowDefinition Height="auto"></RowDefinition>
             <RowDefinition></RowDefinition>
         </Grid.RowDefinitions>
-        <Button Grid.Row="0" DockPanel.Dock="Top" Content="Hide | Show CRUD Menu" Click="ShowOrHideCRUDMenu_Click"/>
-        <Grid Grid.Row="1" DockPanel.Dock="Top" Name="gridCRUD">
+        <Button Grid.Row="0" Content="Hide | Show CRUD Menu" Click="ShowOrHideCRUDMenu_Click"/>
+        <Grid Grid.Row="1" Name="gridCRUD">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="*" />
                 <ColumnDefinition Width="*" />
@@ -48,8 +48,7 @@
                 <TextBox x:Name="txtDesc" Text="{Binding Description}" TextWrapping="Wrap" materialDesign:HintAssist.Hint="Description" Style="{StaticResource MaterialDesignFloatingHintTextBox}"/>
             </StackPanel>
         </Grid>
-        <ScrollViewer Grid.Row="2" DockPanel.Dock="Top" VerticalScrollBarVisibility="Visible">
-        <!--<materialDesign:Card Grid.Row="2" Margin="5" VerticalAlignment="Stretch">-->
+        <Grid Grid.Row="2">
             <ListView x:Name="listProducts" ScrollViewer.CanContentScroll="False" SelectionChanged="ListProducts_SelectionChanged">
                 <ListView.View>
                     <GridView>
@@ -81,7 +80,6 @@
                     </GridView>
                 </ListView.View>
             </ListView>
-            </ScrollViewer>
-        <!--</materialDesign:Card>-->
+        </Grid>
     </Grid>
 </UserControl>

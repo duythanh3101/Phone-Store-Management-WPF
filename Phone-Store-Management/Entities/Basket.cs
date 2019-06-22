@@ -41,7 +41,18 @@ namespace Phone_Store_Management.Entities
             var existingDetail = Details.FirstOrDefault(i => i.ProductId == productId);
             if (existingDetail.Quantity < amount)
             {
-                existingDetail.Quantity += quantity;
+                int q = existingDetail.Quantity;
+                details.Remove(existingDetail);
+                
+                details.Add(new BasketDetails()
+                {
+                    ProductId = productId,
+                    UnitPrice = unitPrice,
+                    Quantity = q + quantity,
+                    ProductName = productName
+                });
+                
+
             }
         }
 
