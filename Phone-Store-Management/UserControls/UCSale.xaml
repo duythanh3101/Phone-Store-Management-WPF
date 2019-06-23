@@ -8,145 +8,132 @@
              mc:Ignorable="d" 
              d:DesignHeight="800" d:DesignWidth="800"
              Name="ucSale"
-             xml:lang="vi-VN"
-             >
-    <Grid>
-        <Grid x:Name="MainGrid">
-            <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="0.5*"></ColumnDefinition>
-                <ColumnDefinition Width="5"></ColumnDefinition>
-                <ColumnDefinition Width="0.5*"></ColumnDefinition>
-            </Grid.ColumnDefinitions>
-
-            <Grid Grid.Column="0">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="auto"></RowDefinition>
-                    <RowDefinition ></RowDefinition>
-                </Grid.RowDefinitions>
-                <TextBox Margin="10,30,10,0" x:Name="txtFilter" Grid.Row="0" materialDesign:HintAssist.Hint="Search"
-                  Foreground="Black" TextChanged="TxtFilter_TextChanged" />
-                <ListView x:Name="listitem" Grid.Row="1" HorizontalAlignment="Stretch" ScrollViewer.CanContentScroll="True" ScrollViewer.HorizontalScrollBarVisibility="Auto" ScrollViewer.VerticalScrollBarVisibility="Auto" IsSynchronizedWithCurrentItem="False" 
-                           ItemsSource="{Binding}">
-                    <ListView.ItemsPanel>
-                        <ItemsPanelTemplate>
-                            <UniformGrid Columns="3" />
-                        </ItemsPanelTemplate>
-                    </ListView.ItemsPanel>
-                    <ListView.ItemTemplate>
-                        <DataTemplate>
-                            <Canvas Margin="10" Width="100" Height="150">
-                                <Border >
-                                    <Canvas>
-                                        <Border Panel.ZIndex="2"  BorderBrush="Black" BorderThickness="0.5">
-                                            <TextBlock Panel.ZIndex="2" Text="{Binding Quantity}" Background="#FF4D69FF" Foreground="#FFF9F8F8" FontFamily="Lato" FontSize="14" />
-                                        </Border>
-                                        <Border Panel.ZIndex="1" Width="100" Height="100" CornerRadius="5" Margin="5">
-                                            <Border.Effect>
-                                                <DropShadowEffect ShadowDepth="1"/>
-                                            </Border.Effect>
-                                            <Border.Background>
-                                                <ImageBrush ImageSource="{Binding ImageURL}"/>
-                                            </Border.Background>
-                                        </Border>
-                                        <TextBlock Panel.ZIndex="2" Margin="5" Text="{Binding Price, StringFormat={}{0:C}}" FontSize="17" FontFamily="Franklin Gothic Medium" Canvas.Top="110"/>
-                                        <TextBlock Panel.ZIndex="2" Margin="5 0" Text="{Binding DisplayName}" FontSize="15" Canvas.Top="130" TextWrapping="Wrap"/>
-                                    </Canvas>
-                                </Border>
-                                <Canvas.ContextMenu>
-                                    <ContextMenu>
-                                        <MenuItem Header="View detail" Click="ViewProductDetail_Click"/>
-                                        <MenuItem Header="Add to cart" Click="AddToCart_Click"/>
-                                    </ContextMenu>
-                                </Canvas.ContextMenu>
+             xml:lang="vi-VN">
+    <Grid x:Name="MainGrid">
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.6*"></ColumnDefinition>
+            <!--<ColumnDefinition Width="5"></ColumnDefinition>-->
+            <ColumnDefinition Width="0.4*"></ColumnDefinition>
+        </Grid.ColumnDefinitions>
+        <!--Search bar and list of products-->
+        <Grid Grid.Column="0">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="auto"></RowDefinition>
+                <RowDefinition></RowDefinition>
+            </Grid.RowDefinitions>
+            <TextBox Grid.Row="0" Margin="10,5,10,5" x:Name="txtFilter" materialDesign:HintAssist.Hint="Search"
+                  Style="{StaticResource MaterialDesignFloatingHintTextBox}" FontSize="20" Foreground="Black" TextChanged="TxtFilter_TextChanged"/>
+            <ListView Grid.Row="1" x:Name="listitem" IsSynchronizedWithCurrentItem="False" ItemsSource="{Binding}" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                <ListView.ItemsPanel>
+                    <ItemsPanelTemplate>
+                        <UniformGrid Columns="3" />
+                    </ItemsPanelTemplate>
+                </ListView.ItemsPanel>
+                <ListView.ItemTemplate>
+                    <DataTemplate>
+                        <StackPanel Margin="5">
+                            <Canvas Panel.ZIndex="2">
+                                <TextBlock Text="{Binding Quantity}" Foreground="Red" FontSize="35"/>
                             </Canvas>
-                        </DataTemplate>
-                    </ListView.ItemTemplate>
-                    <ListView.GroupStyle>
-                        <GroupStyle>
-                            <GroupStyle.ContainerStyle>
-                                <Style TargetType="{x:Type GroupItem}">
-                                    <Setter Property="Template">
-                                        <Setter.Value>
-                                            <ControlTemplate>
-                                                <Expander IsExpanded="true">
-                                                    <Expander.Header>
-                                                        <StackPanel Orientation="Horizontal" IsEnabled="True">
-                                                            <Label Content="{Binding DisplayName}" FontWeight="Bold" Foreground="Gray" FontSize="22" VerticalAlignment="Center" />
-                                                            <TextBlock Text="{Binding ItemCount}" FontSize="22" Foreground="Green" FontWeight="Bold" FontStyle="Italic" VerticalAlignment="Center" />
-                                                            <TextBlock Text=" item(s)" FontSize="22" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Center" />
-                                                        </StackPanel>
-                                                    </Expander.Header>
-                                                    <ItemsPresenter />
-                                                </Expander>
-                                            </ControlTemplate>
-                                        </Setter.Value>
-                                    </Setter>
-                                </Style>
-                            </GroupStyle.ContainerStyle>
-                        </GroupStyle>
-                    </ListView.GroupStyle>
-                </ListView>
-            </Grid>
-
-            <Grid Grid.Column="2">
-                <DockPanel Margin="0,10,0,0">
-                    <DockPanel DockPanel.Dock="Top">
-                        <TextBlock Text="Cart" TextAlignment="Center" FontSize="24" Foreground="#FF686868" Margin="10,0,0,0"/>
-                        <Button Content="Search warranty" Click="SearchWarranty_Click" HorizontalAlignment="Right" Margin="0,0,10,0"/>
-                    </DockPanel>
-
-                    <StackPanel DockPanel.Dock="Bottom">
-                        <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
-                            <Label Content="TOTAL :" FontSize="24" FontWeight="Bold" Foreground="Red" />
-                            <TextBlock Name="total" Text="0" VerticalAlignment="Center"  TextAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="Red" />
+                            <StackPanel>
+                                <Image Source="{Binding ImageURL}" Width="auto" Height="auto"/>
+                                <TextBlock Text="{Binding Price, StringFormat={}{0:C}}" FontSize="17" FontFamily="Franklin Gothic Medium"/>
+                                <TextBlock Text="{Binding DisplayName}" FontSize="15" TextWrapping="Wrap"/>
+                            </StackPanel>
+                            <StackPanel.ContextMenu>
+                                <ContextMenu>
+                                    <MenuItem Header="View detail" Click="ViewProductDetail_Click"/>
+                                    <MenuItem Header="Add to cart" Click="AddToCart_Click"/>
+                                </ContextMenu>
+                            </StackPanel.ContextMenu>
                         </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
-                            <Label Content="Phone Number :" FontSize="24" FontWeight="Bold" Foreground="Red" />
-                            <TextBox Name="txtPhoneNumber" Width="200" MaxLength="15" VerticalAlignment="Center"  TextAlignment="Center" FontSize="24" Foreground="Black" TextChanged="PhoneNumber_TextChanged" PreviewTextInput="NumberValidationTextBox" />
-                        </StackPanel>
-                        <StackPanel Orientation="Horizontal" Margin="10,10,10,10">
-                            <Label Content="Customer Name :" FontSize="24" FontWeight="Bold" Foreground="Red" />
-                            <TextBox Name="txtCustomerName" Width="200" MaxLength="50" VerticalAlignment="Center"  TextAlignment="Center" FontSize="24" Foreground="Black" TextChanged="CustomerName_TextChanged"/>
-                        </StackPanel>
-                        <UniformGrid Columns="2">
-                            <Button Name="ClearButton" Click="ClearButton_Click" Content="Clear" Margin="10,10,10,10" MaxWidth="200" Height="40" Background="#FFFF4545" FontSize="22" />
-                            <Button Name="PayButton" IsEnabled="False" Click="PayButton_Click" Content="Pay" Margin="10,10,10,10" IsDefault="True" MaxWidth="200" Height="40" FontSize="22" />
-                        </UniformGrid>
-                    </StackPanel>
-                    <Grid DockPanel.Dock="Top">
-                        <ListView x:Name="listProductsInCart" Margin="10"  >
-                            <ListView.ItemContainerStyle>
-                                <Style TargetType="{x:Type ListViewItem}">
-                                    <Setter Property="BorderBrush" Value="#FFC2C2C2" />
-                                    <Setter Property="BorderThickness" Value="1" />
-                                </Style>
-                            </ListView.ItemContainerStyle>
-                            <ListView.View>
-                                <GridView>
-                                    <GridViewColumn Header="ID" Width="45" DisplayMemberBinding="{Binding ProductId}" />
-                                    <GridViewColumn Header="Name" Width="180" DisplayMemberBinding="{Binding ProductName}" />
-                                    <GridViewColumn Header="Count" Width="70">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <TextBox Text="{Binding Quantity,Mode=TwoWay}" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                    <GridViewColumn Header="Total" Width="80"  DisplayMemberBinding="{Binding TotalPrice, Mode=TwoWay}" />
-                                    <GridViewColumn Width="95">
-                                        <GridViewColumn.CellTemplate>
-                                            <DataTemplate>
-                                                <Button Content="Delete" Click="Delete_Click" />
-                                            </DataTemplate>
-                                        </GridViewColumn.CellTemplate>
-                                    </GridViewColumn>
-                                </GridView>
-                            </ListView.View>
-                        </ListView>
-                    </Grid>
-                </DockPanel>
-            </Grid>
-            <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Center" ShowsPreview="False"/>
+                    </DataTemplate>
+                </ListView.ItemTemplate>
+                <ListView.GroupStyle>
+                    <GroupStyle>
+                        <GroupStyle.ContainerStyle>
+                            <Style TargetType="{x:Type GroupItem}">
+                                <Setter Property="Template">
+                                    <Setter.Value>
+                                        <ControlTemplate>
+                                            <Expander IsExpanded="true">
+                                                <Expander.Header>
+                                                    <StackPanel Orientation="Horizontal" IsEnabled="True">
+                                                        <Label Content="{Binding DisplayName}" FontWeight="Bold" Foreground="Gray" FontSize="22" VerticalAlignment="Center" />
+                                                        <TextBlock Text="{Binding ItemCount}" FontSize="22" Foreground="Green" FontWeight="Bold" FontStyle="Italic" VerticalAlignment="Center" />
+                                                        <TextBlock Text=" item(s)" FontSize="22" Foreground="Silver" FontStyle="Italic" VerticalAlignment="Center" />
+                                                    </StackPanel>
+                                                </Expander.Header>
+                                                <ItemsPresenter />
+                                            </Expander>
+                                        </ControlTemplate>
+                                    </Setter.Value>
+                                </Setter>
+                            </Style>
+                        </GroupStyle.ContainerStyle>
+                    </GroupStyle>
+                </ListView.GroupStyle>
+            </ListView>
         </Grid>
+        <!--Warranty, cart and payment info-->
+        <Grid Grid.Column="2">
+            <DockPanel Margin="0,10,0,0">
+                <DockPanel DockPanel.Dock="Top">
+                    <TextBlock Text="Cart" TextAlignment="Center" FontSize="24" Foreground="#FF686868" Margin="10,0,0,0"/>
+                    <Button Content="Search warranty" Click="SearchWarranty_Click" HorizontalAlignment="Right" Margin="0,0,10,0">
+                    </Button>
+                </DockPanel>
+
+                <StackPanel DockPanel.Dock="Bottom">
+                    <StackPanel Orientation="Horizontal" Margin="10,5,10,5">
+                        <Label Content="TOTAL :" FontSize="24" FontWeight="Bold" Foreground="Red" />
+                        <TextBlock Name="total" Text="0" VerticalAlignment="Center"  TextAlignment="Center" FontSize="24" FontWeight="Bold" Foreground="Red" />
+                    </StackPanel>
+                    <UniformGrid Columns="2" Margin="10,5,10,5">
+                        <TextBox Name="txtPhoneNumber" MaxLength="15" materialDesign:HintAssist.Hint="Phone number" Margin="0,0,5,0"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextAlignment="Center" FontSize="24" Foreground="Black" TextChanged="PhoneNumber_TextChanged" PreviewTextInput="NumberValidationTextBox" />
+                        <TextBox Name="txtCustomerName" MaxLength="50" materialDesign:HintAssist.Hint="Customer name" Margin="5,0,0,0"
+                         Style="{StaticResource MaterialDesignFloatingHintTextBox}" TextAlignment="Center" FontSize="24" Foreground="Black" TextChanged="CustomerName_TextChanged"/>
+                    </UniformGrid>
+                    <UniformGrid Columns="2" Margin="10,5,10,10">
+                        <Button Name="ClearButton" Click="ClearButton_Click" Content="Clear" Margin="10,10,10,10" MaxWidth="200" Height="40" Background="#FFFF4545" FontSize="22" />
+                        <Button Name="PayButton" IsEnabled="False" Click="PayButton_Click" Content="Pay" Margin="10,10,10,10" IsDefault="True" MaxWidth="200" Height="40" FontSize="22" />
+                    </UniformGrid>
+                </StackPanel>
+                <Grid DockPanel.Dock="Top">
+                    <ListView x:Name="listProductsInCart" Margin="10"  >
+                        <ListView.ItemContainerStyle>
+                            <Style TargetType="{x:Type ListViewItem}">
+                                <Setter Property="BorderBrush" Value="#FFC2C2C2" />
+                                <Setter Property="BorderThickness" Value="1" />
+                            </Style>
+                        </ListView.ItemContainerStyle>
+                        <ListView.View>
+                            <GridView>
+                                <GridViewColumn Header="ID" DisplayMemberBinding="{Binding ProductId}"/>
+                                <GridViewColumn Header="Name" Width="180" DisplayMemberBinding="{Binding ProductName}" />
+                                <GridViewColumn Header="Count">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <TextBox Text="{Binding Quantity,Mode=TwoWay}" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                                <GridViewColumn Header="Total" Width="80"  DisplayMemberBinding="{Binding TotalPrice, Mode=TwoWay}" />
+                                <GridViewColumn Width="95">
+                                    <GridViewColumn.CellTemplate>
+                                        <DataTemplate>
+                                            <Button Content="Delete" Click="Delete_Click" />
+                                        </DataTemplate>
+                                    </GridViewColumn.CellTemplate>
+                                </GridViewColumn>
+                            </GridView>
+                        </ListView.View>
+                    </ListView>
+                </Grid>
+            </DockPanel>
+        </Grid>
+        <!--Grid splitter-->
+        <!--<GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Center" ShowsPreview="False"/>-->
     </Grid>
 </UserControl>

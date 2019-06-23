@@ -72,7 +72,7 @@
                         </Button>
                     </StackPanel>
                 </StackPanel>
-                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Manager Dashboard</TextBlock>
+                <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="22">Dashboard</TextBlock>
             </Grid>
 
             <!--Grid contains all of usercontrols-->

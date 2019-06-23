@@ -72,6 +72,7 @@ namespace Phone_Store_Management.UserControls
             }
             double totalprice = basket.TotalPrice();
             total.Text = MoneyConverter.ToDecimal(totalprice);
+            EnablePayButton();
         }
 
         private void PayButton_Click(object sender, RoutedEventArgs e)
@@ -182,7 +183,7 @@ namespace Phone_Store_Management.UserControls
         {
             string phoneNumber = txtPhoneNumber.Text.ToString();
             string customerName = txtCustomerName.Text.ToString();
-            if (!phoneNumber.Equals("") && !customerName.Equals(""))
+            if (!phoneNumber.Equals("") && !customerName.Equals("") && basket.TotalPrice() >0)
             {
                 PayButton.IsEnabled = true;
             }
