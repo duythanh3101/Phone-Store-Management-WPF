@@ -143,7 +143,7 @@ namespace Phone_Store_Management.Windows
                     else
                     {
                         ConfirmButton.Visibility = Visibility.Collapsed;
-                        Exchange.Text = "$0.00";
+                        Exchange.Text = MoneyConverter.ToDecimal(0);
                     }
                 }
             }

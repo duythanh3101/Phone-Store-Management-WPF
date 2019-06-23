@@ -34,9 +34,9 @@
                 <ListView x:Name="ListBills" ScrollViewer.VerticalScrollBarVisibility="Visible" ScrollViewer.CanContentScroll="True" >
                     <ListView.View>
                         <GridView>
-                            <GridViewColumn Header="Bill ID" DisplayMemberBinding="{Binding BillID}" Width="80"></GridViewColumn>
+                            <GridViewColumn Header="Bill ID" DisplayMemberBinding="{Binding Id}" Width="80"></GridViewColumn>
                             <GridViewColumn Header="Date" DisplayMemberBinding="{Binding BillDate, StringFormat='dd/MM/yyyy'}" Width="150"></GridViewColumn>
-                            <GridViewColumn Header="Cashier ID" DisplayMemberBinding="{Binding CashierID}" Width="150"></GridViewColumn>
+                            <GridViewColumn Header="Cashier ID" DisplayMemberBinding="{Binding UserId}" Width="150"></GridViewColumn>
                             <GridViewColumn Header="TotalPrice" DisplayMemberBinding="{Binding TotalPrice}" Width="200"></GridViewColumn>
                             <GridViewColumn Width="150" x:Name="DeleteColumn">
                                 <GridViewColumn.CellTemplate>
