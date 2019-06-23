@@ -106,7 +106,7 @@
 
                     <StackPanel Orientation="Vertical" VerticalAlignment="Bottom">
                         <Image Height="50" Width="50" VerticalAlignment="Bottom" Source="Images/avatar.png" Stretch="Fill"/>
-                        <TextBlock Name="txtLoggedInUser" Text="Hello" Height="20" VerticalAlignment="Center" Margin="20,10" Foreground="#000"/>
+                        <TextBlock Name="txtLoggedInUser" Text="Hello" Height="20" VerticalAlignment="Center" HorizontalAlignment="Center" Margin="20,10" Foreground="#000"/>
                     </StackPanel>
                 </Grid>
 

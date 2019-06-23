@@ -7,21 +7,27 @@
              xmlns:DVC="clr-namespace:System.Windows.Controls.DataVisualization.Charting;assembly=System.Windows.Controls.DataVisualization.Toolkit"
              xmlns:local="clr-namespace:Phone_Store_Management.UserControls"
              mc:Ignorable="d" 
-             d:DesignHeight="450" d:DesignWidth="800">
-    <Grid ScrollViewer.CanContentScroll="True">
-        <Grid.RowDefinitions>
-            <RowDefinition Height="0.5*"/>
-            <!--<RowDefinition Height="0.5*"/>-->
-        </Grid.RowDefinitions>
-        <DVC:Chart Grid.Row="0" Name="mcChart" Foreground="Black">
-            <DVC:Chart.Title>"Revenue by products"</DVC:Chart.Title>
+             d:DesignHeight="450" d:DesignWidth="800" FontSize="20">
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.5*"/>
+            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="0.5*"/>
+        </Grid.ColumnDefinitions>
+        <DVC:Chart Grid.Column="0" Name="byProductChart" Foreground="Black">
+            <DVC:Chart.Title>Revenue by products</DVC:Chart.Title>
             <DVC:Chart.Series>
-                <DVC:PieSeries Foreground="Black" IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
+                <DVC:PieSeries IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
                 </DVC:PieSeries>
             </DVC:Chart.Series>
         </DVC:Chart>
-        <!--<DVC:Chart Grid.Row="1">
-            
-        </DVC:Chart>-->
+        <GridSplitter Grid.Column="1" Width="3" HorizontalAlignment="Center" ShowsPreview="False"/>
+        <DVC:Chart Grid.Column="2" Name="byBrandChart" Foreground="Black">
+            <DVC:Chart.Title>Revenue by brands</DVC:Chart.Title>
+            <DVC:Chart.Series>
+                <DVC:PieSeries IndependentValueBinding="{Binding Path=Key}" DependentValueBinding="{Binding Path=Value}">
+                </DVC:PieSeries>
+            </DVC:Chart.Series>
+        </DVC:Chart>
     </Grid>
 </UserControl>

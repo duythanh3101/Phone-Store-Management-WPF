@@ -27,6 +27,7 @@ namespace Phone_Store_Management.UserControls
         {
             InitializeComponent();
             LoadPieChartData();
+            LoadRevenueByBrand();
         }
         private void LoadPieChartData()
         {
@@ -57,7 +58,41 @@ namespace Phone_Store_Management.UserControls
             {
                 result[i] = new KeyValuePair<string, double>(productDAO.Get(int.Parse(result[i].Key)).DisplayName, result[i].Value);
             }
-            ((PieSeries)mcChart.Series[0]).ItemsSource = result;
+            ((PieSeries)byProductChart.Series[0]).ItemsSource = result;
+        }
+
+        private void LoadRevenueByBrand()
+        {
+            //Get all bill details
+            List<BillDetail> list = new BillDetailDAO().GetAll();
+            //Return if list contains no products
+            if (list.Count() == 0)
+                return;
+            //Only get productID and unit price
+            List<KeyValuePair<string, double>> sources = new List<KeyValuePair<string, double>> { };
+            foreach (BillDetail bd in list)
+            {
+                sources.Add(new KeyValuePair<string, double>(bd.ProductId.ToString(), bd.UnitPrice));
+            }
+            
+            //Replace key with Product DisplayName
+            ProductDAO productDAO = new ProductDAO();
+            for (int i = 0; i < sources.Count(); i++)
+            {
+                sources[i] = new KeyValuePair<string, double>(productDAO.Get(int.Parse(sources[i].Key)).Brand, sources[i].Value);
+            }
+
+            //Sum duplicated value
+            List<KeyValuePair<string, double>> result = new List<KeyValuePair<string, double>> { };
+            foreach (KeyValuePair<string, double> pair in sources)
+            {
+                if (result.FindIndex(x => x.Key == pair.Key) < 0)
+                {
+                    double total = sources.Where(x => x.Key == pair.Key).Sum(x => x.Value);
+                    result.Add(new KeyValuePair<string, double>(pair.Key, total));
+                }
+            }
+            ((PieSeries)byBrandChart.Series[0]).ItemsSource = result;
         }
     }
 }
